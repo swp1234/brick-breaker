@@ -12,12 +12,16 @@ class SoundEngine {
     }
 
     getSoundPreference() {
-        const saved = localStorage.getItem('sound_enabled');
-        return saved !== null ? saved === 'true' : true;
+        const saved = localStorage.getItem('sfx_enabled');
+        return saved !== null ? saved !== 'false' : true;
     }
 
     setSoundPreference(enabled) {
-        localStorage.setItem('sound_enabled', enabled);
+        try {
+            localStorage.setItem('sfx_enabled', enabled);
+        } catch (e) {
+            console.warn('Could not save sound preference', e);
+        }
     }
 
     init() {
