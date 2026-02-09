@@ -77,6 +77,9 @@ class BrickBreakerGame {
             totalPlayTime: 0
         };
 
+        // Leaderboard system
+        this.leaderboard = new LeaderboardManager('brick-breaker', 10);
+
         this.setupCanvas();
         this.setupEventListeners();
         this.loadStats();
@@ -460,7 +463,14 @@ class BrickBreakerGame {
         this.gameRunning = false;
         this.state = GAME_STATES.GAMEOVER;
 
-        if (this.score > this.highScore) {
+        // Add score to leaderboard
+        const leaderboardResult = this.leaderboard.addScore(this.score, {
+            stage: this.currentStage,
+            bricksDestroyed: this.stats.bricksDestroyed
+        });
+
+        const isNewRecord = leaderboardResult.isNewRecord;
+        if (isNewRecord) {
             this.highScore = this.score;
             localStorage.setItem('bb_highscore', this.highScore);
             document.getElementById('go-new-record').classList.remove('hidden');
@@ -476,6 +486,9 @@ class BrickBreakerGame {
         document.getElementById('go-score').textContent = this.score;
         document.getElementById('go-best').textContent = this.highScore;
         document.getElementById('go-stage').querySelector('.stage-value').textContent = this.currentStage;
+
+        // Display leaderboard
+        this.displayLeaderboard(leaderboardResult);
 
         this.showGameoverScreen();
         if (window.sfx) window.sfx.playGameOverSound();
@@ -804,6 +817,83 @@ class BrickBreakerGame {
         requestAnimationFrame(gameLoop);
     }
 }
+
+// Add displayLeaderboard method to BrickBreakerGame
+BrickBreakerGame.prototype.displayLeaderboard = function(leaderboardResult) {
+    const gameoverScreen = document.getElementById('gameover-screen');
+    let leaderboardContainer = gameoverScreen.querySelector('.leaderboard-section');
+    if (!leaderboardContainer) {
+        leaderboardContainer = document.createElement('div');
+        leaderboardContainer.className = 'leaderboard-section';
+        gameoverScreen.appendChild(leaderboardContainer);
+    }
+
+    const topScores = this.leaderboard.getTopScores(5);
+    const currentScore = parseInt(document.getElementById('go-score').textContent);
+
+    let html = '<div class="leaderboard-title">🏆 Top 5 Scores</div>';
+    html += '<div class="leaderboard-list">';
+
+    topScores.forEach((entry, index) => {
+        const medals = ['🥇', '🥈', '🥉', '4️⃣', '5️⃣'];
+        const isCurrentScore = entry.score === currentScore && leaderboardResult.isNewRecord;
+        const classes = isCurrentScore ? 'leaderboard-item highlight' : 'leaderboard-item';
+
+        html += `
+            <div class="${classes}">
+                <span class="medal">${medals[index] || (index + 1) + '.'}</span>
+                <span class="score-value">${entry.score}</span>
+                <span class="score-date">${entry.date}</span>
+            </div>
+        `;
+    });
+
+    html += '</div>';
+    html += '<button id="reset-leaderboard-btn" class="reset-btn">Reset Records</button>';
+
+    leaderboardContainer.innerHTML = html;
+
+    const resetBtn = leaderboardContainer.querySelector('#reset-leaderboard-btn');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            if (confirm('Are you sure you want to reset all records?')) {
+                this.leaderboard.resetScores();
+                this.highScore = 0;
+                localStorage.setItem('bb_highscore', '0');
+                this.displayLeaderboard({ isNewRecord: false, rank: -1, notifications: [] });
+                alert('Records reset!');
+            }
+        });
+    }
+
+    leaderboardResult.notifications.forEach(notif => {
+        this.showNotification(notif);
+    });
+};
+
+BrickBreakerGame.prototype.showNotification = function(notification) {
+    const notifEl = document.createElement('div');
+    notifEl.className = `notification notification-${notification.type}`;
+    notifEl.textContent = notification.message;
+    notifEl.style.position = 'fixed';
+    notifEl.style.top = '20px';
+    notifEl.style.right = '20px';
+    notifEl.style.padding = '12px 20px';
+    notifEl.style.backgroundColor = notification.type === 'new-record' ? '#FFD700' : '#4CAF50';
+    notifEl.style.color = '#000';
+    notifEl.style.borderRadius = '8px';
+    notifEl.style.fontSize = '14px';
+    notifEl.style.fontWeight = 'bold';
+    notifEl.style.zIndex = '9999';
+    notifEl.style.animation = 'slideIn 0.3s ease-out';
+
+    document.body.appendChild(notifEl);
+
+    setTimeout(() => {
+        notifEl.style.animation = 'slideOut 0.3s ease-out forwards';
+        setTimeout(() => notifEl.remove(), 300);
+    }, 3000);
+};
 
 // Initialize game when DOM is loaded
 window.addEventListener('DOMContentLoaded', () => {
