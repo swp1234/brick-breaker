@@ -16,7 +16,7 @@ const GAME_CONFIG = {
     BRICK_PADDING: 4,
     PADDLE_MARGIN: 10,
     MAX_LIVES: 3,
-    MAX_STAGES: 12
+    MAX_STAGES: 20
 };
 
 const GAME_STATES = {
@@ -206,35 +206,53 @@ class BrickBreakerGame {
 
     getStageBrickPattern(stage) {
         const patterns = {
+            // Early game (Easy - flow state)
             1: Array(32).fill('NORMAL'),
-            2: [
+            2: Array(32).fill('NORMAL'),
+            3: Array(32).fill('NORMAL'),
+            // Mid game (Normal)
+            4: [
                 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL',
                 'NORMAL', 'STRONG', 'STRONG', 'NORMAL', 'NORMAL', 'STRONG', 'STRONG', 'NORMAL',
                 'NORMAL', 'STRONG', 'STRONG', 'NORMAL', 'NORMAL', 'STRONG', 'STRONG', 'NORMAL',
                 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL'
             ],
-            3: [
+            5: [
                 'NORMAL', 'STRONG', 'NORMAL', 'STRONG', 'NORMAL', 'STRONG', 'NORMAL', 'STRONG',
                 'STRONG', 'NORMAL', 'STRONG', 'NORMAL', 'STRONG', 'NORMAL', 'STRONG', 'NORMAL',
                 'NORMAL', 'STRONG', 'NORMAL', 'STRONG', 'NORMAL', 'STRONG', 'NORMAL', 'STRONG',
                 'STRONG', 'NORMAL', 'STRONG', 'NORMAL', 'STRONG', 'NORMAL', 'STRONG', 'NORMAL'
             ],
-            4: [
+            6: Array(32).fill('STRONG'),
+            // Hard game (Hard)
+            7: [
                 'UNBREAKABLE', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'UNBREAKABLE',
                 'NORMAL', 'SPECIAL', 'STRONG', 'STRONG', 'STRONG', 'STRONG', 'SPECIAL', 'NORMAL',
                 'NORMAL', 'STRONG', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'STRONG', 'NORMAL',
                 'UNBREAKABLE', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'UNBREAKABLE'
             ],
-            5: Array(32).fill('STRONG'),
-            6: [
+            8: [
                 'SPECIAL', 'SPECIAL', 'SPECIAL', 'SPECIAL', 'SPECIAL', 'SPECIAL', 'SPECIAL', 'SPECIAL',
                 'STRONG', 'STRONG', 'STRONG', 'STRONG', 'STRONG', 'STRONG', 'STRONG', 'STRONG',
                 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL',
                 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL'
+            ],
+            // Expert game (Extreme)
+            9: [
+                'UNBREAKABLE', 'SPECIAL', 'SPECIAL', 'SPECIAL', 'SPECIAL', 'SPECIAL', 'SPECIAL', 'UNBREAKABLE',
+                'SPECIAL', 'STRONG', 'STRONG', 'STRONG', 'STRONG', 'STRONG', 'STRONG', 'SPECIAL',
+                'SPECIAL', 'STRONG', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'STRONG', 'SPECIAL',
+                'UNBREAKABLE', 'SPECIAL', 'SPECIAL', 'SPECIAL', 'SPECIAL', 'SPECIAL', 'SPECIAL', 'UNBREAKABLE'
+            ],
+            10: [
+                'UNBREAKABLE', 'UNBREAKABLE', 'SPECIAL', 'SPECIAL', 'SPECIAL', 'SPECIAL', 'UNBREAKABLE', 'UNBREAKABLE',
+                'SPECIAL', 'SPECIAL', 'STRONG', 'STRONG', 'STRONG', 'STRONG', 'SPECIAL', 'SPECIAL',
+                'SPECIAL', 'STRONG', 'STRONG', 'NORMAL', 'NORMAL', 'STRONG', 'STRONG', 'SPECIAL',
+                'UNBREAKABLE', 'UNBREAKABLE', 'SPECIAL', 'SPECIAL', 'SPECIAL', 'SPECIAL', 'UNBREAKABLE', 'UNBREAKABLE'
             ]
         };
 
-        return patterns[stage] || patterns[1];
+        return patterns[stage] || patterns[Math.min(10, stage)];
     }
 
     update() {
