@@ -962,6 +962,37 @@ body {
     }
 }
 
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-dark, var(--bg-primary, var(--background, #0f0f23)));
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ff5722;
+    border-radius: 5px;
+    border: 2px solid var(--bg-dark, var(--bg-primary, var(--background, #0f0f23)));
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ff784e;
+    opacity: 0.8;
+}
+
+/* Selection Color */
+::selection {
+    background: #ff5722;
+    color: white;
+}
+
+::-moz-selection {
+    background: #ff5722;
+    color: white;
+}
+
 @media (max-width: 320px) {
     .game-logo h1 {
         font-size: 24px;
@@ -982,4 +1013,13 @@ body {
     .rec-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+}
+
+/* Focus Visible - Accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+[role="button"]:focus-visible {
+    outline: 3px solid #e74c3c;
+    outline-offset: 2px;
 }
