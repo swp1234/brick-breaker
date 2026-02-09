@@ -1,0 +1,61 @@
+{
+  "app": {
+    "loading": "Memuat..."
+  },
+  "ad": {
+    "placeholder": "Area Iklan",
+    "placeholder_interstitial": "Area Iklan (Layar Penuh)",
+    "label": "Iklan",
+    "countdown": "Tutup dalam",
+    "close": "✕ Tutup"
+  },
+  "menu": {
+    "subtitle": "Game Brick Breaker Klasik",
+    "highScore": "Skor Tertinggi",
+    "startGame": "Mulai Permainan",
+    "stats": "📊 Statistik",
+    "hint": "Gerakkan dayung dengan mouse atau sentuhan",
+    "home": "Beranda DopaBrain"
+  },
+  "screens": {
+    "back": "← Kembali",
+    "stats": "Statistik"
+  },
+  "game": {
+    "tapToStart": "Ketuk untuk memulai!",
+    "back": "Beranda DopaBrain",
+    "gameOver": "Permainan Berakhir"
+  },
+  "pause": {
+    "title": "Jeda",
+    "resume": "Lanjutkan",
+    "quit": "Menu"
+  },
+  "gameover": {
+    "title": "Permainan Berakhir 💥",
+    "score": "Skor",
+    "best": "Terbaik",
+    "stage": "Tingkat",
+    "newRecord": "🎉 Rekor Baru!",
+    "revive": "Tonton iklan untuk menghidupkan kembali",
+    "retry": "Mainkan Lagi",
+    "share": "📤 Bagikan",
+    "menu": "🏠 Menu"
+  },
+  "recommendations": {
+    "title": "Coba Ini Juga"
+  },
+  "powerups": {
+    "paddleExpand": "Perluasan Dayung",
+    "slowBall": "Bola Lambat",
+    "multiBall": "Bola Ganda",
+    "laser": "Laser",
+    "extraLife": "Nyawa Ekstra"
+  },
+  "brickTypes": {
+    "normal": "Normal",
+    "strong": "Kuat",
+    "special": "Istimewa",
+    "unbreakable": "Tak Terpisahkan"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "app": {
+    "loading": "로딩 중..."
+  },
+  "ad": {
+    "placeholder": "광고 영역",
+    "placeholder_interstitial": "광고 영역 (전면)",
+    "label": "광고",
+    "countdown": "초 후 닫기",
+    "close": "✕ 닫기"
+  },
+  "menu": {
+    "subtitle": "클래식 벽돌깨기",
+    "highScore": "최고 점수",
+    "startGame": "게임 시작",
+    "stats": "📊 통계",
+    "hint": "마우스 또는 터치로 패들을 움직이세요",
+    "home": "DopaBrain 홈"
+  },
+  "screens": {
+    "back": "← 뒤로",
+    "stats": "통계"
+  },
+  "game": {
+    "tapToStart": "탭하여 시작!",
+    "back": "DopaBrain 홈",
+    "gameOver": "게임 오버"
+  },
+  "pause": {
+    "title": "일시정지",
+    "resume": "계속하기",
+    "quit": "메뉴로"
+  },
+  "gameover": {
+    "title": "게임 오버 💥",
+    "score": "점수",
+    "best": "최고",
+    "stage": "스테이지",
+    "newRecord": "🎉 새 기록!",
+    "revive": "광고 보고 부활하기",
+    "retry": "다시 하기",
+    "share": "📤 공유",
+    "menu": "🏠 메뉴"
+  },
+  "recommendations": {
+    "title": "이것도 해보세요"
+  },
+  "powerups": {
+    "paddleExpand": "패들 확장",
+    "slowBall": "공 속도 감소",
+    "multiBall": "멀티볼",
+    "laser": "레이저",
+    "extraLife": "추가 생명"
+  },
+  "brickTypes": {
+    "normal": "일반",
+    "strong": "강화",
+    "special": "특수",
+    "unbreakable": "파괴 불가"
+  }
+}

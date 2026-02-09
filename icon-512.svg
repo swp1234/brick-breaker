@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <style>
+      .brick-bg { fill: #0f0f23; }
+      .brick-main { fill: #e74c3c; }
+      .brick-accent { fill: #f39c12; }
+      .brick-shine { fill: #fff; opacity: 0.6; }
+      .brick-glow { fill: none; stroke: #e74c3c; stroke-width: 3; opacity: 0.3; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" class="brick-bg"/>
+
+  <!-- Decorative circles -->
+  <circle cx="256" cy="256" r="240" class="brick-glow"/>
+  <circle cx="256" cy="256" r="200" class="brick-glow"/>
+
+  <!-- Main brick pattern (scaled) -->
+  <g>
+    <!-- Top row of bricks -->
+    <rect x="60" y="80" width="80" height="50" class="brick-main" rx="8"/>
+    <rect x="160" y="80" width="80" height="50" class="brick-accent" rx="8"/>
+    <rect x="260" y="80" width="80" height="50" class="brick-main" rx="8"/>
+    <rect x="360" y="80" width="80" height="50" class="brick-main" rx="8"/>
+
+    <!-- Second row -->
+    <rect x="60" y="150" width="80" height="50" class="brick-accent" rx="8"/>
+    <rect x="160" y="150" width="80" height="50" class="brick-main" rx="8"/>
+    <rect x="260" y="150" width="80" height="50" class="brick-main" rx="8"/>
+    <rect x="360" y="150" width="80" height="50" class="brick-accent" rx="8"/>
+
+    <!-- Third row -->
+    <rect x="60" y="220" width="80" height="50" class="brick-main" rx="8"/>
+    <rect x="160" y="220" width="80" height="50" class="brick-accent" rx="8"/>
+    <rect x="260" y="220" width="80" height="50" class="brick-main" rx="8"/>
+    <rect x="360" y="220" width="80" height="50" class="brick-main" rx="8"/>
+  </g>
+
+  <!-- Paddle -->
+  <rect x="136" y="320" width="240" height="30" class="brick-main" rx="15"/>
+  <rect x="136" y="320" width="240" height="10" class="brick-shine" rx="15"/>
+
+  <!-- Ball -->
+  <circle cx="256" cy="260" r="20" class="brick-accent"/>
+  <circle cx="256" cy="260" r="20" fill="none" stroke="#f39c12" stroke-width="2" opacity="0.5"/>
+  <circle cx="266" cy="250" r="5" class="brick-shine"/>
+
+  <!-- Decorative border -->
+  <circle cx="256" cy="256" r="245" fill="none" stroke="#e74c3c" stroke-width="4" opacity="0.5"/>
+</svg>

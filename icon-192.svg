@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <defs>
+    <style>
+      .brick-bg { fill: #0f0f23; }
+      .brick-main { fill: #e74c3c; }
+      .brick-accent { fill: #f39c12; }
+      .brick-shine { fill: #fff; opacity: 0.6; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="192" height="192" class="brick-bg"/>
+
+  <!-- Decorative border -->
+  <circle cx="96" cy="96" r="90" fill="none" stroke="#e74c3c" stroke-width="2" opacity="0.3"/>
+
+  <!-- Main brick pattern -->
+  <g>
+    <!-- Top bricks -->
+    <rect x="24" y="36" width="32" height="20" class="brick-main" rx="4"/>
+    <rect x="60" y="36" width="32" height="20" class="brick-accent" rx="4"/>
+    <rect x="96" y="36" width="32" height="20" class="brick-main" rx="4"/>
+    <rect x="132" y="36" width="32" height="20" class="brick-main" rx="4"/>
+
+    <!-- Middle bricks -->
+    <rect x="24" y="64" width="32" height="20" class="brick-accent" rx="4"/>
+    <rect x="60" y="64" width="32" height="20" class="brick-main" rx="4"/>
+    <rect x="96" y="64" width="32" height="20" class="brick-main" rx="4"/>
+    <rect x="132" y="64" width="32" height="20" class="brick-accent" rx="4"/>
+  </g>
+
+  <!-- Paddle -->
+  <rect x="56" y="120" width="80" height="12" class="brick-main" rx="6"/>
+  <rect x="56" y="120" width="80" height="4" class="brick-shine" rx="6"/>
+
+  <!-- Ball -->
+  <circle cx="96" cy="100" r="8" class="brick-accent"/>
+  <circle cx="96" cy="100" r="8" fill="none" stroke="#f39c12" stroke-width="1" opacity="0.5"/>
+
+  <!-- Shine/glow -->
+  <circle cx="98" cy="98" r="2" class="brick-shine"/>
+</svg>

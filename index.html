@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="robots" content="max-image-preview:large">
+
+    <!-- SEO -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3600813755953882" crossorigin="anonymous"></script>
+    <title>Brick Breaker 🧱 - 클래식 벽돌깨기 게임</title>
+    <meta name="description" content="클래식 벽돌깨기(Breakout)의 현대적 리메이크! 🧱 10+ 스테이지, 파워업 아이템, 부드러운 물리 엔진. 최고 점수를 목표로 벽돌을 깨세요!">
+    <meta name="keywords" content="벽돌깨기, 브릭 브레이커, 클래식 게임, 캐주얼 게임, 무료 게임, 아케이드 게임, 모바일 게임, breakout">
+    <link rel="canonical" href="https://dopabrain.com/brick-breaker/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Brick Breaker 🧱 - 벽돌깨기 게임">
+    <meta property="og:description" content="클래식 벽돌깨기를 현대적으로 리메이크! 네온 그래픽, 파워업, 10+ 스테이지. 친구들과 점수를 비교해보세요!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dopabrain.com/brick-breaker/">
+    <meta property="og:image" content="https://dopabrain.com/brick-breaker/icon-512.svg">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:image:type" content="image/svg+xml">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:locale:alternate" content="ja_JP">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Brick Breaker 🧱 - 벽돌깨기">
+    <meta name="twitter:description" content="클래식 벽돌깨기의 현대적 리메이크! 네온 그래픽과 부드러운 애니메이션으로 즐기세요! 🧱">
+    <meta name="twitter:image" content="https://dopabrain.com/brick-breaker/icon-512.svg">
+    <meta name="twitter:site" content="@dopabrain">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Brick Breaker",
+        "applicationCategory": "GameApplication",
+        "description": "클래식 벽돌깨기의 현대적 리메이크. 네온 스타일, 터치/마우스 조작, 10+ 스테이지, 파워업 아이템, 부드러운 물리 엔진, 파티클 이펙트, 음향 효과.",
+        "url": "https://dopabrain.com/brick-breaker/",
+        "image": "https://dopabrain.com/brick-breaker/icon-192.svg",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript. Modern browser (Chrome, Safari, Firefox, Edge).",
+        "author": {
+            "@type": "Organization",
+            "name": "DopaBrain",
+            "url": "https://dopabrain.com/"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "DopaBrain",
+            "url": "https://dopabrain.com/"
+        },
+        "inLanguage": ["ko", "en", "zh", "hi", "ru", "ja", "es", "pt", "id", "tr", "de", "fr"],
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "KRW",
+            "availability": "https://schema.org/InStock"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.6",
+            "ratingCount": "3200",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
+        "featureList": "네온 그래픽, 터치/마우스 조작, 10+ 스테이지, 파워업 아이템, 파티클 이펙트, 음향 효과, 최고 기록 저장, 일시정지, 결과 공유",
+        "gamePlatform": "웹 브라우저"
+    }
+    </script>
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f0f23">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="icon" type="image/svg+xml" href="icon-192.svg">
+    <link rel="apple-touch-icon" href="icon-192.svg">
+
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Preload critical resources -->
+    <link rel="preload" href="css/style.css" as="style">
+    <!-- Prefetch app scripts -->
+    <link rel="prefetch" href="js/sound-engine.js">
+    <link rel="prefetch" href="js/app.js">
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J8GSWM40TV"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-J8GSWM40TV');</script>
+    <script src="js/i18n.js" defer></script>
+</head>
+<body>
+    <div class="app-loader" id="app-loader">
+        <div class="loader-content">
+            <div class="loader-emoji">🧱</div>
+            <div class="loader-spinner"></div>
+            <div class="loader-text" data-i18n="app.loading">로딩 중...</div>
+        </div>
+    </div>
+
+    <!-- Background Grid -->
+    <div class="bg-grid" id="bg-grid"></div>
+
+    <!-- Sound Toggle -->
+    <button class="sound-toggle" id="sound-toggle" onclick="if(window.sfx)window.sfx.init();const enabled=window.sfx?window.sfx.toggle():false;this.textContent=enabled?'🔊':'🔇';" title="Toggle Sound">🔊</button>
+
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button class="lang-btn" id="langBtn" title="Change Language">🌐</button>
+        <div class="lang-menu hidden" id="langMenu"></div>
+    </div>
+
+    <div class="game-wrapper">
+        <!-- === MENU SCREEN === -->
+        <div class="screen menu-screen active" id="menu-screen">
+            <div class="ad-banner ad-top">
+                <span class="ad-placeholder" data-i18n="ad.placeholder">광고 영역</span>
+            </div>
+
+            <div class="menu-content">
+                <div class="game-logo">
+                    <span class="logo-brick">🧱</span>
+                    <h1>BRICK BREAKER</h1>
+                    <p class="logo-sub" data-i18n="menu.subtitle">클래식 벽돌깨기</p>
+                </div>
+
+                <div class="high-score-display" id="menu-highscore">
+                    <span class="hs-label" data-i18n="menu.highScore">최고 점수</span>
+                    <span class="hs-value" id="hs-value">0</span>
+                </div>
+
+                <div class="menu-buttons">
+                    <button class="btn-primary btn-start" id="btn-start">
+                        <span data-i18n="menu.startGame">게임 시작</span>
+                        <span class="btn-icon">▶</span>
+                    </button>
+                    <button class="btn-secondary btn-stats" id="btn-stats">
+                        <span data-i18n="menu.stats">📊 통계</span>
+                    </button>
+                </div>
+
+                <p class="menu-hint" data-i18n="menu.hint">마우스 또는 터치로 패들을 움직이세요</p>
+
+                <a href="https://dopabrain.com/portal/" class="home-link" data-i18n="menu.home">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="m15 18-6-6 6-6"></path></svg>
+                    DopaBrain 홈
+                </a>
+            </div>
+        </div>
+
+        <!-- === GAME SCREEN === -->
+        <div class="screen game-screen" id="game-screen">
+            <div class="game-hud">
+                <div class="hud-left">
+                    <div class="hud-stage" id="hud-stage">STAGE 1</div>
+                    <div class="hud-score" id="hud-score">0</div>
+                </div>
+                <div class="hud-right">
+                    <div class="hud-lives" id="hud-lives">❤️❤️❤️</div>
+                    <button class="hud-pause" id="btn-pause" aria-label="pause" data-i18n-attr="pause.title">⏸</button>
+                </div>
+            </div>
+            <canvas id="game-canvas"></canvas>
+            <div class="tap-hint" id="tap-hint" data-i18n="game.tapToStart">탭하여 시작!</div>
+        </div>
+
+        <!-- === PAUSE OVERLAY === -->
+        <div class="overlay pause-overlay hidden" id="pause-overlay">
+            <div class="overlay-card">
+                <h2 data-i18n="pause.title">일시정지</h2>
+                <div class="pause-buttons">
+                    <button class="btn-primary" id="btn-resume" data-i18n="pause.resume">계속하기</button>
+                    <button class="btn-secondary" id="btn-quit" data-i18n="pause.quit">메뉴로</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- === GAMEOVER SCREEN === -->
+        <div class="screen gameover-screen hidden" id="gameover-screen">
+            <div class="gameover-card">
+                <h2 class="go-title" data-i18n="gameover.title">게임 오버 💥</h2>
+
+                <div class="go-scores">
+                    <div class="go-score-main">
+                        <span class="go-label" data-i18n="gameover.score">점수</span>
+                        <span class="go-value" id="go-score">0</span>
+                    </div>
+                    <div class="go-score-best">
+                        <span class="go-label" data-i18n="gameover.best">최고</span>
+                        <span class="go-value" id="go-best">0</span>
+                    </div>
+                </div>
+
+                <div class="go-stage" id="go-stage">
+                    <span class="stage-label" data-i18n="gameover.stage">스테이지</span>
+                    <span class="stage-value">1</span>
+                </div>
+
+                <div class="go-new-record hidden" id="go-new-record" data-i18n="gameover.newRecord">🎉 새 기록!</div>
+
+                <div class="go-buttons">
+                    <button class="btn-revive" id="btn-revive">
+                        <span class="revive-icon">📺</span>
+                        <span data-i18n="gameover.revive">광고 보고 부활하기</span>
+                    </button>
+                    <button class="btn-primary btn-retry" id="btn-retry">
+                        <span data-i18n="gameover.retry">다시 하기</span>
+                    </button>
+                    <div class="go-sub-buttons">
+                        <button class="btn-share" id="btn-share" data-i18n="gameover.share">📤 공유</button>
+                        <button class="btn-menu" id="btn-menu" data-i18n="gameover.menu">🏠 메뉴</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ad-banner ad-bottom-go">
+                <span class="ad-placeholder" data-i18n="ad.placeholder">광고 영역</span>
+            </div>
+        </div>
+
+        <!-- === STATS SCREEN === -->
+        <div class="screen stats-screen hidden" id="stats-screen">
+            <div class="stats-header">
+                <button class="btn-back" id="btn-stats-back" data-i18n="screens.back">← 뒤로</button>
+                <h2 data-i18n="screens.stats">통계</h2>
+            </div>
+            <div class="stats-content" id="stats-content"></div>
+        </div>
+
+        <!-- === INTERSTITIAL AD OVERLAY === -->
+        <div class="overlay interstitial-overlay hidden" id="interstitial-overlay">
+            <div class="interstitial-card">
+                <p class="interstitial-label" data-i18n="ad.label">광고</p>
+                <div class="interstitial-placeholder" data-i18n="ad.placeholder_interstitial">광고 영역 (전면)</div>
+                <div class="interstitial-timer">
+                    <span id="ad-countdown">5</span><span data-i18n="ad.countdown">초 후 닫기</span>
+                </div>
+                <button class="btn-close-ad hidden" id="btn-close-ad" data-i18n="ad.close">✕ 닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cross Promotion Recommendations -->
+    <div class="recommendations-section">
+        <div class="rec-title" data-i18n="recommendations.title">이것도 해보세요</div>
+        <div class="rec-grid">
+            <a href="https://dopabrain.com/snake-game/" class="rec-card" target="_blank">
+                <span class="rec-icon">🐍</span>
+                <span class="rec-info">
+                    <span class="rec-name">스네이크 클래식</span>
+                </span>
+            </a>
+            <a href="https://dopabrain.com/idle-clicker/" class="rec-card" target="_blank">
+                <span class="rec-icon">⚔️</span>
+                <span class="rec-info">
+                    <span class="rec-name">던전 클리커</span>
+                </span>
+            </a>
+            <a href="https://dopabrain.com/sky-runner/" class="rec-card" target="_blank">
+                <span class="rec-icon">🚀</span>
+                <span class="rec-info">
+                    <span class="rec-name">스카이 러너</span>
+                </span>
+            </a>
+            <a href="https://dopabrain.com/zigzag-runner/" class="rec-card" target="_blank">
+                <span class="rec-icon">⚡</span>
+                <span class="rec-info">
+                    <span class="rec-name">지그재그 러너</span>
+                </span>
+            </a>
+            <a href="https://dopabrain.com/stack-tower/" class="rec-card" target="_blank">
+                <span class="rec-icon">🏢</span>
+                <span class="rec-info">
+                    <span class="rec-name">스택 타워</span>
+                </span>
+            </a>
+            <a href="https://dopabrain.com/number-puzzle/" class="rec-card" target="_blank">
+                <span class="rec-icon">🔢</span>
+                <span class="rec-info">
+                    <span class="rec-name">2048 퍼즐</span>
+                </span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer with Home Link -->
+    <footer class="game-footer">
+        <a href="https://dopabrain.com/portal/" class="back-link" data-i18n="game.back" aria-label="Go back to DopaBrain home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
+            DopaBrain 홈
+        </a>
+    </footer>
+
+    <script src="js/sound-engine.js" defer></script>
+    <script src="js/app.js" defer></script>
+
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then((registration) => {
+                    console.log('Service Worker registered:', registration);
+                }).catch((error) => {
+                    console.warn('Service Worker registration failed:', error);
+                });
+            });
+        }
+    </script>
+
+    <style>
+        .sound-toggle {
+            position: fixed;
+            top: 12px;
+            right: 52px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        .sound-toggle:hover { background: rgba(255,255,255,0.2); }
+        .sound-toggle:active { transform: scale(0.95); }
+    </style>
+</body>
+</html>

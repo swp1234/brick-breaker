@@ -1,0 +1,61 @@
+{
+  "app": {
+    "loading": "Yükleniyor..."
+  },
+  "ad": {
+    "placeholder": "Reklam Alanı",
+    "placeholder_interstitial": "Reklam Alanı (Tam Ekran)",
+    "label": "Reklam",
+    "countdown": "Kapat",
+    "close": "✕ Kapat"
+  },
+  "menu": {
+    "subtitle": "Klasik Brick Breaker Oyunu",
+    "highScore": "En Yüksek Puan",
+    "startGame": "Oyunu Başlat",
+    "stats": "📊 İstatistikler",
+    "hint": "Raket'i fare veya dokunuşla hareket ettirin",
+    "home": "DopaBrain Ana Sayfa"
+  },
+  "screens": {
+    "back": "← Geri",
+    "stats": "İstatistikler"
+  },
+  "game": {
+    "tapToStart": "Başlamak için dokunun!",
+    "back": "DopaBrain Ana Sayfa",
+    "gameOver": "Oyun Bitti"
+  },
+  "pause": {
+    "title": "Duraklat",
+    "resume": "Devam Et",
+    "quit": "Menü"
+  },
+  "gameover": {
+    "title": "Oyun Bitti 💥",
+    "score": "Puan",
+    "best": "En İyi",
+    "stage": "Seviye",
+    "newRecord": "🎉 Yeni Rekor!",
+    "revive": "İhya etmek için reklam izleyin",
+    "retry": "Tekrar Oyna",
+    "share": "📤 Paylaş",
+    "menu": "🏠 Menü"
+  },
+  "recommendations": {
+    "title": "Bunları da Deneyin"
+  },
+  "powerups": {
+    "paddleExpand": "Raket Genişletme",
+    "slowBall": "Yavaş Top",
+    "multiBall": "Çoklu Top",
+    "laser": "Lazer",
+    "extraLife": "Ekstra Yaşam"
+  },
+  "brickTypes": {
+    "normal": "Normal",
+    "strong": "Güçlü",
+    "special": "Özel",
+    "unbreakable": "Kırılmaz"
+  }
+}

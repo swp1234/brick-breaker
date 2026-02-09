@@ -1,0 +1,61 @@
+{
+  "app": {
+    "loading": "Loading..."
+  },
+  "ad": {
+    "placeholder": "Ad Area",
+    "placeholder_interstitial": "Ad Area (Fullscreen)",
+    "label": "Ad",
+    "countdown": "Close in",
+    "close": "✕ Close"
+  },
+  "menu": {
+    "subtitle": "Classic Breakout Game",
+    "highScore": "High Score",
+    "startGame": "Start Game",
+    "stats": "📊 Stats",
+    "hint": "Move paddle with mouse or touch",
+    "home": "DopaBrain Home"
+  },
+  "screens": {
+    "back": "← Back",
+    "stats": "Statistics"
+  },
+  "game": {
+    "tapToStart": "Tap to start!",
+    "back": "DopaBrain Home",
+    "gameOver": "Game Over"
+  },
+  "pause": {
+    "title": "Paused",
+    "resume": "Resume",
+    "quit": "Menu"
+  },
+  "gameover": {
+    "title": "Game Over 💥",
+    "score": "Score",
+    "best": "Best",
+    "stage": "Stage",
+    "newRecord": "🎉 New Record!",
+    "revive": "Watch Ad to Revive",
+    "retry": "Play Again",
+    "share": "📤 Share",
+    "menu": "🏠 Menu"
+  },
+  "recommendations": {
+    "title": "Try These Too"
+  },
+  "powerups": {
+    "paddleExpand": "Paddle Expand",
+    "slowBall": "Slow Ball",
+    "multiBall": "Multi Ball",
+    "laser": "Laser",
+    "extraLife": "Extra Life"
+  },
+  "brickTypes": {
+    "normal": "Normal",
+    "strong": "Strong",
+    "special": "Special",
+    "unbreakable": "Unbreakable"
+  }
+}

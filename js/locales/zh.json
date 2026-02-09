@@ -1,0 +1,61 @@
+{
+  "app": {
+    "loading": "加载中..."
+  },
+  "ad": {
+    "placeholder": "广告区域",
+    "placeholder_interstitial": "广告区域（全屏）",
+    "label": "广告",
+    "countdown": "秒后关闭",
+    "close": "✕ 关闭"
+  },
+  "menu": {
+    "subtitle": "经典打砖块游戏",
+    "highScore": "最高分",
+    "startGame": "开始游戏",
+    "stats": "📊 统计",
+    "hint": "用鼠标或触摸移动挡板",
+    "home": "DopaBrain 主页"
+  },
+  "screens": {
+    "back": "← 返回",
+    "stats": "统计"
+  },
+  "game": {
+    "tapToStart": "点击开始！",
+    "back": "DopaBrain 主页",
+    "gameOver": "游戏结束"
+  },
+  "pause": {
+    "title": "暂停",
+    "resume": "继续",
+    "quit": "菜单"
+  },
+  "gameover": {
+    "title": "游戏结束 💥",
+    "score": "分数",
+    "best": "最佳",
+    "stage": "关卡",
+    "newRecord": "🎉 新纪录！",
+    "revive": "看广告重新开始",
+    "retry": "重新开始",
+    "share": "📤 分享",
+    "menu": "🏠 菜单"
+  },
+  "recommendations": {
+    "title": "还有其他游戏"
+  },
+  "powerups": {
+    "paddleExpand": "挡板扩展",
+    "slowBall": "减速球",
+    "multiBall": "多球",
+    "laser": "激光",
+    "extraLife": "额外生命"
+  },
+  "brickTypes": {
+    "normal": "普通",
+    "strong": "强化",
+    "special": "特殊",
+    "unbreakable": "不可破坏"
+  }
+}

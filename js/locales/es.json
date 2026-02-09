@@ -1,0 +1,61 @@
+{
+  "app": {
+    "loading": "Cargando..."
+  },
+  "ad": {
+    "placeholder": "Área de anuncios",
+    "placeholder_interstitial": "Área de anuncios (pantalla completa)",
+    "label": "Anuncio",
+    "countdown": "Cerrar en",
+    "close": "✕ Cerrar"
+  },
+  "menu": {
+    "subtitle": "Juego Clásico Brick Breaker",
+    "highScore": "Puntuación Máxima",
+    "startGame": "Iniciar Juego",
+    "stats": "📊 Estadísticas",
+    "hint": "Mueve la paleta con el ratón o el toque",
+    "home": "Inicio de DopaBrain"
+  },
+  "screens": {
+    "back": "← Atrás",
+    "stats": "Estadísticas"
+  },
+  "game": {
+    "tapToStart": "¡Toca para iniciar!",
+    "back": "Inicio de DopaBrain",
+    "gameOver": "Fin del Juego"
+  },
+  "pause": {
+    "title": "Pausa",
+    "resume": "Reanudar",
+    "quit": "Menú"
+  },
+  "gameover": {
+    "title": "Fin del Juego 💥",
+    "score": "Puntuación",
+    "best": "Mejor",
+    "stage": "Nivel",
+    "newRecord": "🎉 ¡Nuevo Récord!",
+    "revive": "Ver anuncio para revivir",
+    "retry": "Jugar de Nuevo",
+    "share": "📤 Compartir",
+    "menu": "🏠 Menú"
+  },
+  "recommendations": {
+    "title": "Prueba también estos"
+  },
+  "powerups": {
+    "paddleExpand": "Expansión de Paleta",
+    "slowBall": "Bola Lenta",
+    "multiBall": "Multi Bola",
+    "laser": "Láser",
+    "extraLife": "Vida Extra"
+  },
+  "brickTypes": {
+    "normal": "Normal",
+    "strong": "Fuerte",
+    "special": "Especial",
+    "unbreakable": "Irrompible"
+  }
+}
