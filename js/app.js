@@ -524,7 +524,8 @@ class BrickBreakerGame {
     }
 
     shareScore() {
-        const text = `🧱 Brick Breaker에서 ${this.score}점을 얻었어요! 스테이지: ${this.currentStage}\n\n나도 도전해보세요: https://dopabrain.com/brick-breaker/`;
+        const shareTemplate = window.i18n?.t('share_msg.text') || '🧱 Brick Breaker: {score} pts! Stage: {stage}\n\nTry it: https://dopabrain.com/brick-breaker/';
+        const text = shareTemplate.replace('{score}', this.score).replace('{stage}', this.currentStage);
 
         if (navigator.share) {
             navigator.share({
@@ -751,23 +752,23 @@ class BrickBreakerGame {
 
         const statsHtml = `
             <div class="stat-item">
-                <span class="stat-label">총 점수</span>
+                <span class="stat-label">${window.i18n?.t('stats_detail.totalScore') || 'Total Score'}</span>
                 <span class="stat-value">${this.stats.totalScore}</span>
             </div>
             <div class="stat-item">
-                <span class="stat-label">게임 횟수</span>
+                <span class="stat-label">${window.i18n?.t('stats_detail.gamesPlayed') || 'Games Played'}</span>
                 <span class="stat-value">${this.stats.gamesPlayed}</span>
             </div>
             <div class="stat-item">
-                <span class="stat-label">최고 스테이지</span>
+                <span class="stat-label">${window.i18n?.t('stats_detail.maxStage') || 'Max Stage'}</span>
                 <span class="stat-value">${this.stats.maxStage}</span>
             </div>
             <div class="stat-item">
-                <span class="stat-label">파괴한 벽돌</span>
+                <span class="stat-label">${window.i18n?.t('stats_detail.bricksDestroyed') || 'Bricks Destroyed'}</span>
                 <span class="stat-value">${this.stats.bricksDestroyed}</span>
             </div>
             <div class="stat-item">
-                <span class="stat-label">평균 점수</span>
+                <span class="stat-label">${window.i18n?.t('stats_detail.avgScore') || 'Avg Score'}</span>
                 <span class="stat-value">${Math.round(this.stats.totalScore / Math.max(1, this.stats.gamesPlayed))}</span>
             </div>
         `;
