@@ -916,6 +916,21 @@ BrickBreakerGame.prototype.showNotification = function(notification) {
 };
 
 // Initialize game when DOM is loaded
+// Theme toggle functionality
+const themeToggle = document.getElementById('theme-toggle');
+if (themeToggle) {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    themeToggle.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+    themeToggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        const next = current === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        themeToggle.textContent = next === 'light' ? '🌙' : '☀️';
+    });
+}
+
 window.addEventListener('DOMContentLoaded', () => {
     // Hide loader
     const loader = document.getElementById('app-loader');
