@@ -57,5 +57,10 @@
     "strong": "Güçlü",
     "special": "Özel",
     "unbreakable": "Kırılmaz"
+  },
+  "share": {
+    "twitter": "Twitter",
+    "copyUrl": "📋 URL Kopyala",
+    "copied": "✅ Kopyalandı!"
   }
 }

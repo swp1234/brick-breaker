@@ -57,5 +57,10 @@
     "strong": "Fuerte",
     "special": "Especial",
     "unbreakable": "Irrompible"
+  },
+  "share": {
+    "twitter": "Twitter",
+    "copyUrl": "📋 Copiar URL",
+    "copied": "✅ ¡Copiado!"
   }
 }

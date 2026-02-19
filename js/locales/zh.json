@@ -57,5 +57,10 @@
     "strong": "强化",
     "special": "特殊",
     "unbreakable": "不可破坏"
+  },
+  "share": {
+    "twitter": "推特",
+    "copyUrl": "📋 复制链接",
+    "copied": "✅ 已复制!"
   }
 }

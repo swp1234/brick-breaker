@@ -57,5 +57,10 @@
     "strong": "Kuat",
     "special": "Istimewa",
     "unbreakable": "Tak Terpisahkan"
+  },
+  "share": {
+    "twitter": "Twitter",
+    "copyUrl": "📋 Salin URL",
+    "copied": "✅ Disalin!"
   }
 }
