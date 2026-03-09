@@ -537,6 +537,8 @@ class BrickBreakerGame {
         // Display leaderboard
         this.displayLeaderboard(leaderboardResult);
 
+        if (typeof DailyStreak !== 'undefined') DailyStreak.report(this.score);
+
         this.showGameoverScreen();
         if (window.sfx) window.sfx.playGameOverSound();
     }
@@ -1014,4 +1016,5 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Start game
     window.game = new BrickBreakerGame();
+    DailyStreak.init({ gameId: 'brick-breaker', bestScoreKey: 'bb_highscore', minTarget: 50 });
 });
