@@ -69,6 +69,14 @@ class BrickBreakerGame {
         this.particles = [];
         this.laser = null;
 
+        // Combo system
+        this.combo = 0;
+        this.maxCombo = 0;
+        this.comboTimer = null;
+        this.floatingTexts = [];
+        this.shakeAmount = 0;
+        this.shakeFrames = 0;
+
         this.stats = {
             totalScore: 0,
             gamesPlayed: 0,
@@ -159,6 +167,9 @@ class BrickBreakerGame {
         this.balls = [];
         this.powerups = [];
         this.laser = null;
+        this.combo = 0;
+        this.maxCombo = 0;
+        this.floatingTexts = [];
 
         this.initializeBalls();
         this.generateBricks();
@@ -360,6 +371,12 @@ class BrickBreakerGame {
             }
 
             if (window.sfx) window.sfx.playPaddleSound();
+
+            // Reset combo on paddle hit
+            if (this.combo >= 3) {
+                this.addFloatingText(`${this.combo}x COMBO!`, ball.x, this.paddle.y - 30, '#f39c12');
+            }
+            this.combo = 0;
         }
     }
 
@@ -391,8 +408,19 @@ class BrickBreakerGame {
                 brick.health--;
                 if (brick.health <= 0) {
                     brick.active = false;
-                    this.score += 10 * originalHealth;
+                    this.combo++;
+                    if (this.combo > this.maxCombo) this.maxCombo = this.combo;
+                    const comboMultiplier = Math.min(this.combo, 10);
+                    const points = 10 * originalHealth * comboMultiplier;
+                    this.score += points;
                     this.stats.bricksDestroyed++;
+
+                    // Floating score text
+                    const label = this.combo >= 2 ? `+${points} (${this.combo}x)` : `+${points}`;
+                    this.addFloatingText(label, brick.x + brick.width / 2, brick.y, this.combo >= 5 ? '#f39c12' : '#fff');
+
+                    // Screen shake on high combos
+                    if (this.combo >= 5) this.triggerShake(this.combo >= 10 ? 5 : 3);
 
                     // Create particles
                     this.createParticles(brick.x + brick.width / 2, brick.y + brick.height / 2, brick.color);
@@ -553,9 +581,19 @@ class BrickBreakerGame {
     }
 
     render() {
+        this.ctx.save();
+
+        // Screen shake
+        if (this.shakeFrames > 0) {
+            const sx = (Math.random() - 0.5) * this.shakeAmount;
+            const sy = (Math.random() - 0.5) * this.shakeAmount;
+            this.ctx.translate(sx, sy);
+            this.shakeFrames--;
+        }
+
         // Clear canvas
         this.ctx.fillStyle = 'rgba(15, 15, 35, 0.95)';
-        this.ctx.fillRect(0, 0, GAME_CONFIG.CANVAS_WIDTH, GAME_CONFIG.CANVAS_HEIGHT);
+        this.ctx.fillRect(-5, -5, GAME_CONFIG.CANVAS_WIDTH + 10, GAME_CONFIG.CANVAS_HEIGHT + 10);
 
         // Grid background
         this.ctx.strokeStyle = 'rgba(231, 76, 60, 0.05)';
@@ -588,6 +626,33 @@ class BrickBreakerGame {
             this.laser.time--;
             if (this.laser.time <= 0) this.laser.active = false;
         }
+
+        // Draw floating texts
+        for (let i = this.floatingTexts.length - 1; i >= 0; i--) {
+            const ft = this.floatingTexts[i];
+            const alpha = ft.life / 40;
+            this.ctx.globalAlpha = alpha;
+            this.ctx.fillStyle = ft.color;
+            this.ctx.font = 'bold 14px -apple-system, sans-serif';
+            this.ctx.textAlign = 'center';
+            this.ctx.fillText(ft.text, ft.x, ft.y);
+            ft.y -= 1;
+            ft.life--;
+            if (ft.life <= 0) this.floatingTexts.splice(i, 1);
+        }
+        this.ctx.globalAlpha = 1;
+
+        // Draw combo counter
+        if (this.combo >= 2) {
+            this.ctx.fillStyle = this.combo >= 5 ? '#f39c12' : '#fff';
+            this.ctx.font = `bold ${Math.min(24 + this.combo, 40)}px -apple-system, sans-serif`;
+            this.ctx.textAlign = 'center';
+            this.ctx.globalAlpha = 0.8;
+            this.ctx.fillText(`${this.combo}x COMBO`, GAME_CONFIG.CANVAS_WIDTH / 2, GAME_CONFIG.CANVAS_HEIGHT / 2);
+            this.ctx.globalAlpha = 1;
+        }
+
+        this.ctx.restore();
     }
 
     drawPaddle() {
@@ -707,6 +772,15 @@ class BrickBreakerGame {
             }
             return true;
         });
+    }
+
+    addFloatingText(text, x, y, color = '#fff') {
+        this.floatingTexts.push({ text, x, y, life: 40, color });
+    }
+
+    triggerShake(intensity) {
+        this.shakeAmount = intensity;
+        this.shakeFrames = 8;
     }
 
     updateHUD() {
