@@ -108,6 +108,10 @@ class BrickBreakerGame {
     setupEventListeners() {
         // Menu buttons
         document.getElementById('btn-start').addEventListener('click', () => this.startGame());
+        document.getElementById('btn-resume-game')?.addEventListener('click', () => {
+            const saved = this.loadGameState();
+            if (saved) this.startGame(saved);
+        });
         document.getElementById('btn-stats').addEventListener('click', () => this.showStats());
         document.getElementById('btn-stats-back').addEventListener('click', () => this.showMenu());
 
@@ -116,6 +120,7 @@ class BrickBreakerGame {
         document.getElementById('btn-resume').addEventListener('click', () => this.togglePause());
         document.getElementById('btn-quit').addEventListener('click', () => {
             this.gameRunning = false;
+            // Keep saved state so player can resume from menu
             this.showMenu();
         });
 
@@ -157,11 +162,8 @@ class BrickBreakerGame {
         }
     }
 
-    startGame() {
+    startGame(resumeState) {
         this.state = GAME_STATES.GAME;
-        this.score = 0;
-        this.lives = GAME_CONFIG.MAX_LIVES;
-        this.currentStage = 1;
         this.gameRunning = false;
         this.gamePaused = false;
         this.balls = [];
@@ -170,6 +172,17 @@ class BrickBreakerGame {
         this.combo = 0;
         this.maxCombo = 0;
         this.floatingTexts = [];
+
+        if (resumeState) {
+            this.score = resumeState.score;
+            this.lives = resumeState.lives;
+            this.currentStage = resumeState.currentStage;
+        } else {
+            this.clearGameState();
+            this.score = 0;
+            this.lives = GAME_CONFIG.MAX_LIVES;
+            this.currentStage = 1;
+        }
 
         this.initializeBalls();
         this.generateBricks();
@@ -338,6 +351,7 @@ class BrickBreakerGame {
             if (this.lives <= 0) {
                 this.endGame();
             } else {
+                this.saveGameState();
                 this.initializeBalls();
                 this.gameRunning = false;
                 this.showTapHint();
@@ -507,8 +521,10 @@ class BrickBreakerGame {
             this.generateBricks();
             this.balls.forEach(b => b.onPaddle = true);
             this.gameRunning = false;
+            this.saveGameState();
             this.showTapHint();
         } else {
+            this.clearGameState();
             this.endGame();
         }
     }
@@ -516,6 +532,7 @@ class BrickBreakerGame {
     endGame() {
         this.gameRunning = false;
         this.state = GAME_STATES.GAMEOVER;
+        this.clearGameState();
 
         // Add score to leaderboard
         const leaderboardResult = this.leaderboard.addScore(this.score, {
@@ -817,6 +834,18 @@ class BrickBreakerGame {
         this.state = GAME_STATES.MENU;
         this.showScreen('menu-screen');
         document.getElementById('hs-value').textContent = this.highScore;
+
+        // Show or hide resume button based on saved state
+        const resumeBtn = document.getElementById('btn-resume-game');
+        const savedState = this.loadGameState();
+        if (resumeBtn) {
+            if (savedState) {
+                resumeBtn.classList.remove('hidden');
+                resumeBtn.textContent = `Resume (Stage ${savedState.currentStage})`;
+            } else {
+                resumeBtn.classList.add('hidden');
+            }
+        }
     }
 
     showGameScreen() {
@@ -897,6 +926,31 @@ class BrickBreakerGame {
             overlay.classList.add('hidden');
             callback();
         };
+    }
+
+    // --- Session persistence (between-level save/resume) ---
+
+    saveGameState() {
+        const state = {
+            currentStage: this.currentStage,
+            lives: this.lives,
+            score: this.score
+        };
+        localStorage.setItem('brickBreaker_gameState', JSON.stringify(state));
+    }
+
+    loadGameState() {
+        const saved = localStorage.getItem('brickBreaker_gameState');
+        if (!saved) return null;
+        try {
+            return JSON.parse(saved);
+        } catch (e) {
+            return null;
+        }
+    }
+
+    clearGameState() {
+        localStorage.removeItem('brickBreaker_gameState');
     }
 
     saveStats() {
