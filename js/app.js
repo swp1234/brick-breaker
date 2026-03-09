@@ -419,6 +419,13 @@ class BrickBreakerGame {
                     const label = this.combo >= 2 ? `+${points} (${this.combo}x)` : `+${points}`;
                     this.addFloatingText(label, brick.x + brick.width / 2, brick.y, this.combo >= 5 ? '#f39c12' : '#fff');
 
+                    // Haptic feedback for brick destruction and combos
+                    if (this.combo >= 3) {
+                        if (typeof Haptic !== 'undefined') Haptic.medium();
+                    } else {
+                        if (typeof Haptic !== 'undefined') Haptic.light();
+                    }
+
                     // Screen shake on high combos
                     if (this.combo >= 5) this.triggerShake(this.combo >= 10 ? 5 : 3);
 
@@ -541,6 +548,7 @@ class BrickBreakerGame {
 
         this.showGameoverScreen();
         if (window.sfx) window.sfx.playGameOverSound();
+        if (typeof Haptic !== 'undefined') Haptic.heavy();
     }
 
     reviveWithAd() {
