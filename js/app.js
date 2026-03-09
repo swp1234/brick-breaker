@@ -577,13 +577,21 @@ class BrickBreakerGame {
     }
 
     reviveWithAd() {
-        // Show interstitial ad
-        this.showInterstitialAd(() => {
+        const doRevive = () => {
             this.lives++;
             this.initializeBalls();
             this.gameRunning = false;
             this.showGameScreen();
-        });
+        };
+
+        if (typeof GameAds !== 'undefined') {
+            GameAds.showRewarded({
+                onReward: () => doRevive(),
+                onSkip: () => {}
+            });
+        } else {
+            doRevive(); // fallback
+        }
     }
 
     shareScore() {
