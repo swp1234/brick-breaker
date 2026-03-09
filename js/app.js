@@ -563,9 +563,17 @@ class BrickBreakerGame {
 
         if (typeof DailyStreak !== 'undefined') DailyStreak.report(this.score);
 
-        this.showGameoverScreen();
-        if (window.sfx) window.sfx.playGameOverSound();
-        if (typeof Haptic !== 'undefined') Haptic.heavy();
+        const showResult = () => {
+            this.showGameoverScreen();
+            if (window.sfx) window.sfx.playGameOverSound();
+            if (typeof Haptic !== 'undefined') Haptic.heavy();
+        };
+
+        if (typeof GameAds !== 'undefined') {
+            GameAds.showInterstitial({ onComplete: () => showResult() });
+        } else {
+            showResult();
+        }
     }
 
     reviveWithAd() {
@@ -1078,5 +1086,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Start game
     window.game = new BrickBreakerGame();
+    if (typeof GameAds !== 'undefined') GameAds.init();
     DailyStreak.init({ gameId: 'brick-breaker', bestScoreKey: 'bb_highscore', minTarget: 50 });
 });
