@@ -626,6 +626,11 @@ class BrickBreakerGame {
         this.displayLeaderboard(leaderboardResult);
 
         if (typeof DailyStreak !== 'undefined') DailyStreak.report(this.score);
+        if (typeof GameAchievements !== 'undefined') GameAchievements.report({
+            bestScore: this.highScore,
+            totalGames: this.stats.gamesPlayed,
+            bestStage: this.stats.maxStage
+        });
 
         const showResult = () => {
             this.showGameoverScreen();
@@ -1185,4 +1190,15 @@ window.addEventListener('DOMContentLoaded', () => {
     window.game = new BrickBreakerGame();
     if (typeof GameAds !== 'undefined') GameAds.init();
     if (typeof DailyStreak !== 'undefined') DailyStreak.init({ gameId: 'brick-breaker', bestScoreKey: 'bb_highscore', minTarget: 50 });
+    if (typeof GameAchievements !== 'undefined') GameAchievements.init({
+        gameId: 'brick-breaker',
+        defs: [
+            { id: 'score_1000', stat: 'bestScore', target: 1000, icon: '⭐', name: 'Brick Smasher' },
+            { id: 'score_5000', stat: 'bestScore', target: 5000, icon: '🏆', name: 'Brick Master' },
+            { id: 'score_10000', stat: 'bestScore', target: 10000, icon: '👑', name: 'Brick Legend' },
+            { id: 'games_10', stat: 'totalGames', target: 10, icon: '🎮', name: 'Regular Player' },
+            { id: 'stage_5', stat: 'bestStage', target: 5, icon: '🔥', name: 'Stage Warrior' },
+            { id: 'stage_10', stat: 'bestStage', target: 10, icon: '💎', name: 'Stage Champion' }
+        ]
+    });
 });
