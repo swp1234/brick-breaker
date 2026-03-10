@@ -3,12 +3,14 @@
  * Enables offline functionality and PWA features
  */
 
-const CACHE_NAME = 'brick-breaker-v1';
+const CACHE_NAME = 'brick-breaker-v2';
 const ASSETS_TO_CACHE = [
     '/',
     '/index.html',
     '/manifest.json',
     '/css/style.css',
+    '/assets/paddle-opt.png',
+    '/assets/bg-opt.jpg',
     '/js/app.js',
     '/js/i18n.js',
     '/js/sound-engine.js',
