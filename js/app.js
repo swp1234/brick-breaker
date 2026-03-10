@@ -47,7 +47,9 @@ const ASSETS = {
     bgImg: null,
     bgLoaded: false,
     paddleImg: null,
-    paddleLoaded: false
+    paddleLoaded: false,
+    ballImg: null,
+    ballLoaded: false
 };
 
 (function preloadAssets() {
@@ -60,6 +62,11 @@ const ASSETS = {
     paddle.onload = () => { ASSETS.paddleImg = paddle; ASSETS.paddleLoaded = true; };
     paddle.onerror = () => { ASSETS.paddleLoaded = false; };
     paddle.src = 'assets/paddle-opt.png';
+
+    const ball = new Image();
+    ball.onload = () => { ASSETS.ballImg = ball; ASSETS.ballLoaded = true; };
+    ball.onerror = () => { ASSETS.ballLoaded = false; };
+    ball.src = 'assets/ball-opt.png';
 })();
 
 class BrickBreakerGame {
@@ -750,18 +757,28 @@ class BrickBreakerGame {
     }
 
     drawBall(ball) {
-        this.ctx.fillStyle = '#f39c12';
-        this.ctx.shadowColor = 'rgba(243, 156, 18, 0.6)';
-        this.ctx.shadowBlur = 8;
-        this.ctx.beginPath();
-        this.ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-        this.ctx.fill();
-        this.ctx.shadowColor = 'transparent';
+        if (ASSETS.ballLoaded && ASSETS.ballImg) {
+            // Draw ball sprite centered on ball position
+            const size = ball.radius * 2;
+            this.ctx.shadowColor = 'rgba(0, 255, 255, 0.6)';
+            this.ctx.shadowBlur = 10;
+            this.ctx.drawImage(ASSETS.ballImg, ball.x - ball.radius, ball.y - ball.radius, size, size);
+            this.ctx.shadowColor = 'transparent';
+        } else {
+            // Fallback: filled circle
+            this.ctx.fillStyle = '#f39c12';
+            this.ctx.shadowColor = 'rgba(243, 156, 18, 0.6)';
+            this.ctx.shadowBlur = 8;
+            this.ctx.beginPath();
+            this.ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+            this.ctx.fill();
+            this.ctx.shadowColor = 'transparent';
 
-        // Glow
-        this.ctx.strokeStyle = 'rgba(243, 156, 18, 0.7)';
-        this.ctx.lineWidth = 1;
-        this.ctx.stroke();
+            // Glow
+            this.ctx.strokeStyle = 'rgba(243, 156, 18, 0.7)';
+            this.ctx.lineWidth = 1;
+            this.ctx.stroke();
+        }
     }
 
     drawBrick(brick) {

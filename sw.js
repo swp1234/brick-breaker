@@ -10,6 +10,7 @@ const ASSETS_TO_CACHE = [
     '/manifest.json',
     '/css/style.css',
     '/assets/paddle-opt.png',
+    '/assets/ball-opt.png',
     '/assets/bg-opt.jpg',
     '/js/app.js',
     '/js/i18n.js',
