@@ -1095,5 +1095,5 @@ window.addEventListener('DOMContentLoaded', () => {
     // Start game
     window.game = new BrickBreakerGame();
     if (typeof GameAds !== 'undefined') GameAds.init();
-    DailyStreak.init({ gameId: 'brick-breaker', bestScoreKey: 'bb_highscore', minTarget: 50 });
+    if (typeof DailyStreak !== 'undefined') DailyStreak.init({ gameId: 'brick-breaker', bestScoreKey: 'bb_highscore', minTarget: 50 });
 });
