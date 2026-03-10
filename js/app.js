@@ -42,6 +42,26 @@ const POWERUP_TYPES = {
     EXTRA_LIFE: 'extraLife'
 };
 
+// Preload image assets
+const ASSETS = {
+    bgImg: null,
+    bgLoaded: false,
+    paddleImg: null,
+    paddleLoaded: false
+};
+
+(function preloadAssets() {
+    const bg = new Image();
+    bg.onload = () => { ASSETS.bgImg = bg; ASSETS.bgLoaded = true; };
+    bg.onerror = () => { ASSETS.bgLoaded = false; };
+    bg.src = 'assets/bg-opt.jpg';
+
+    const paddle = new Image();
+    paddle.onload = () => { ASSETS.paddleImg = paddle; ASSETS.paddleLoaded = true; };
+    paddle.onerror = () => { ASSETS.paddleLoaded = false; };
+    paddle.src = 'assets/paddle-opt.png';
+})();
+
 class BrickBreakerGame {
     constructor() {
         this.canvas = document.getElementById('game-canvas');
@@ -634,9 +654,16 @@ class BrickBreakerGame {
             this.shakeFrames--;
         }
 
-        // Clear canvas
-        this.ctx.fillStyle = 'rgba(15, 15, 35, 0.95)';
-        this.ctx.fillRect(-5, -5, GAME_CONFIG.CANVAS_WIDTH + 10, GAME_CONFIG.CANVAS_HEIGHT + 10);
+        // Clear canvas with background image or solid fallback
+        if (ASSETS.bgLoaded && ASSETS.bgImg) {
+            this.ctx.drawImage(ASSETS.bgImg, 0, 0, GAME_CONFIG.CANVAS_WIDTH, GAME_CONFIG.CANVAS_HEIGHT);
+            // Semi-transparent overlay to keep game elements visible
+            this.ctx.fillStyle = 'rgba(15, 15, 35, 0.55)';
+            this.ctx.fillRect(0, 0, GAME_CONFIG.CANVAS_WIDTH, GAME_CONFIG.CANVAS_HEIGHT);
+        } else {
+            this.ctx.fillStyle = 'rgba(15, 15, 35, 0.95)';
+            this.ctx.fillRect(-5, -5, GAME_CONFIG.CANVAS_WIDTH + 10, GAME_CONFIG.CANVAS_HEIGHT + 10);
+        }
 
         // Grid background
         this.ctx.strokeStyle = 'rgba(231, 76, 60, 0.05)';
@@ -701,17 +728,25 @@ class BrickBreakerGame {
     drawPaddle() {
         const paddle = this.paddle;
 
-        // Main paddle
-        this.ctx.fillStyle = 'rgba(231, 76, 60, 0.9)';
-        this.ctx.shadowColor = 'rgba(231, 76, 60, 0.6)';
-        this.ctx.shadowBlur = 10;
-        this.ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
-        this.ctx.shadowColor = 'transparent';
+        if (ASSETS.paddleLoaded && ASSETS.paddleImg) {
+            // Draw paddle sprite scaled to current paddle dimensions
+            this.ctx.shadowColor = 'rgba(0, 255, 255, 0.6)';
+            this.ctx.shadowBlur = 12;
+            this.ctx.drawImage(ASSETS.paddleImg, paddle.x, paddle.y, paddle.width, paddle.height);
+            this.ctx.shadowColor = 'transparent';
+        } else {
+            // Fallback: solid paddle
+            this.ctx.fillStyle = 'rgba(231, 76, 60, 0.9)';
+            this.ctx.shadowColor = 'rgba(231, 76, 60, 0.6)';
+            this.ctx.shadowBlur = 10;
+            this.ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
+            this.ctx.shadowColor = 'transparent';
 
-        // Glow
-        this.ctx.strokeStyle = 'rgba(231, 76, 60, 0.5)';
-        this.ctx.lineWidth = 2;
-        this.ctx.strokeRect(paddle.x, paddle.y, paddle.width, paddle.height);
+            // Glow
+            this.ctx.strokeStyle = 'rgba(231, 76, 60, 0.5)';
+            this.ctx.lineWidth = 2;
+            this.ctx.strokeRect(paddle.x, paddle.y, paddle.width, paddle.height);
+        }
     }
 
     drawBall(ball) {
