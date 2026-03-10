@@ -3,7 +3,7 @@
  * Enables offline functionality and PWA features
  */
 
-const CACHE_NAME = 'brick-breaker-v4';
+const CACHE_NAME = 'brick-breaker-v5';
 const ASSETS_TO_CACHE = [
     '/',
     '/index.html',

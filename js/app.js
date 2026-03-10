@@ -31,6 +31,7 @@ const BRICK_TYPES = {
     NORMAL: { health: 1, color: '#e74c3c' },
     STRONG: { health: 2, color: '#c0392b' },
     SPECIAL: { health: 3, color: '#f39c12' },
+    EXPLOSIVE: { health: 1, color: '#ff6b35', explosive: true },
     UNBREAKABLE: { health: Infinity, color: '#34495e' }
 };
 
@@ -314,14 +315,38 @@ class BrickBreakerGame {
                 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL', 'NORMAL'
             ],
             11: [
-                'UNBREAKABLE', 'UNBREAKABLE', 'SPECIAL', 'SPECIAL', 'SPECIAL', 'SPECIAL', 'UNBREAKABLE', 'UNBREAKABLE',
+                'UNBREAKABLE', 'UNBREAKABLE', 'SPECIAL', 'EXPLOSIVE', 'EXPLOSIVE', 'SPECIAL', 'UNBREAKABLE', 'UNBREAKABLE',
                 'SPECIAL', 'SPECIAL', 'STRONG', 'STRONG', 'STRONG', 'STRONG', 'SPECIAL', 'SPECIAL',
-                'SPECIAL', 'STRONG', 'STRONG', 'NORMAL', 'NORMAL', 'STRONG', 'STRONG', 'SPECIAL',
+                'SPECIAL', 'STRONG', 'EXPLOSIVE', 'NORMAL', 'NORMAL', 'EXPLOSIVE', 'STRONG', 'SPECIAL',
                 'UNBREAKABLE', 'UNBREAKABLE', 'SPECIAL', 'SPECIAL', 'SPECIAL', 'SPECIAL', 'UNBREAKABLE', 'UNBREAKABLE'
             ]
         };
 
-        return patterns[stage] || patterns[Math.min(11, stage)];
+        if (patterns[stage]) return patterns[stage];
+        // Procedural stages 12-20
+        return this.generateProceduralPattern(stage);
+    }
+
+    generateProceduralPattern(stage) {
+        const types = ['NORMAL', 'STRONG', 'SPECIAL', 'UNBREAKABLE', 'EXPLOSIVE'];
+        const weights = {
+            NORMAL:      Math.max(0.1, 0.5 - (stage - 12) * 0.04),
+            STRONG:      0.25,
+            SPECIAL:     Math.min(0.3, 0.1 + (stage - 12) * 0.025),
+            UNBREAKABLE: Math.min(0.15, 0.05 + (stage - 12) * 0.01),
+            EXPLOSIVE:   Math.min(0.12, 0.03 + (stage - 12) * 0.01)
+        };
+        const pattern = [];
+        for (let i = 0; i < 32; i++) {
+            let r = Math.random();
+            let chosen = 'NORMAL';
+            for (const t of types) {
+                r -= weights[t];
+                if (r <= 0) { chosen = t; break; }
+            }
+            pattern.push(chosen);
+        }
+        return pattern;
     }
 
     update() {
@@ -491,6 +516,11 @@ class BrickBreakerGame {
                     // Create particles
                     this.createParticles(brick.x + brick.width / 2, brick.y + brick.height / 2, brick.color);
 
+                    // Explosive brick: destroy adjacent bricks
+                    if (BRICK_TYPES[brick.type] && BRICK_TYPES[brick.type].explosive) {
+                        this.explodeBrick(brick);
+                    }
+
                     // Drop powerup
                     if (Math.random() < 0.15) {
                         this.dropPowerup(brick.x + brick.width / 2, brick.y + brick.height / 2);
@@ -500,6 +530,43 @@ class BrickBreakerGame {
                 if (window.sfx) window.sfx.playBrickSound(brick.type.toLowerCase());
 
                 break;
+            }
+        }
+    }
+
+    explodeBrick(brick) {
+        const cx = brick.x + brick.width / 2;
+        const cy = brick.y + brick.height / 2;
+        const radius = 70;
+        this.triggerShake(6);
+        if (typeof Haptic !== 'undefined') Haptic.heavy();
+        // Orange explosion particles
+        for (let i = 0; i < 20; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const speed = 2 + Math.random() * 4;
+            this.particles.push({
+                x: cx, y: cy,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed,
+                life: 1,
+                decay: 0.02,
+                color: '#ff6b35',
+                radius: 3 + Math.random() * 3
+            });
+        }
+        // Destroy adjacent bricks within radius
+        for (const b of this.bricks) {
+            if (!b.active || b === brick || b.health === Infinity) continue;
+            const dx = (b.x + b.width / 2) - cx;
+            const dy = (b.y + b.height / 2) - cy;
+            if (dx * dx + dy * dy < radius * radius) {
+                b.health = 0;
+                b.active = false;
+                this.combo++;
+                this.score += 10;
+                this.stats.bricksDestroyed++;
+                this.createParticles(b.x + b.width / 2, b.y + b.height / 2, b.color);
+                this.addFloatingText('BOOM', b.x + b.width / 2, b.y, '#ff6b35');
             }
         }
     }
@@ -844,6 +911,15 @@ class BrickBreakerGame {
             this.ctx.textAlign = 'center';
             this.ctx.fillText(brick.health, brick.x + brick.width / 2, brick.y + brick.height / 2 + 3);
         }
+
+        // Explosive brick indicator
+        if (brick.type === 'EXPLOSIVE') {
+            const pulse = Math.sin(Date.now() / 300) * 0.3 + 0.7;
+            this.ctx.fillStyle = `rgba(255,107,53,${pulse})`;
+            this.ctx.font = 'bold 12px sans-serif';
+            this.ctx.textAlign = 'center';
+            this.ctx.fillText('\u{1F4A5}', brick.x + brick.width / 2, brick.y + brick.height / 2 + 4);
+        }
     }
 
     drawPowerup(powerup) {
@@ -900,11 +976,14 @@ class BrickBreakerGame {
                 (Math.abs(brick.x - this.paddle.x) < 2 || Math.abs(brick.x + brick.width - this.paddle.x - this.paddle.width) < 2)
             ));
 
-            if (hitByLaser && brick.y < this.paddle.y) {
+            if (hitByLaser && brick.y < this.paddle.y && brick.health !== Infinity) {
                 brick.active = false;
                 this.score += 15;
                 this.stats.bricksDestroyed++;
                 this.createParticles(brick.x + brick.width / 2, brick.y + brick.height / 2, brick.color);
+                if (BRICK_TYPES[brick.type] && BRICK_TYPES[brick.type].explosive) {
+                    this.explodeBrick(brick);
+                }
                 return false;
             }
             return true;
