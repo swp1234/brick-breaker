@@ -15,7 +15,8 @@
     "startGame": "Mulai Permainan",
     "stats": "📊 Statistik",
     "hint": "Gerakkan dayung dengan mouse atau sentuhan",
-    "home": "Beranda DopaBrain"
+    "home": "Beranda DopaBrain",
+    "objective": "Pecahkan semua batu bata! Jangan biarkan bola jatuh!"
   },
   "screens": {
     "back": "← Kembali",

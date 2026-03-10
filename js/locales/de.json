@@ -15,7 +15,8 @@
     "startGame": "Spiel Starten",
     "stats": "📊 Statistik",
     "hint": "Bewegen Sie den Schläger mit Maus oder Berührung",
-    "home": "DopaBrain Startseite"
+    "home": "DopaBrain Startseite",
+    "objective": "Zerstöre alle Steine! Lass den Ball nicht fallen!"
   },
   "screens": {
     "back": "← Zurück",

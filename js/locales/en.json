@@ -15,7 +15,8 @@
     "startGame": "Start Game",
     "stats": "📊 Stats",
     "hint": "Move paddle with mouse or touch",
-    "home": "DopaBrain Home"
+    "home": "DopaBrain Home",
+    "objective": "Break all the bricks! Don't let the ball fall!"
   },
   "screens": {
     "back": "← Back",

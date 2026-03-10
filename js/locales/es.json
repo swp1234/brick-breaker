@@ -15,7 +15,8 @@
     "startGame": "Iniciar Juego",
     "stats": "📊 Estadísticas",
     "hint": "Mueve la paleta con el ratón o el toque",
-    "home": "Inicio de DopaBrain"
+    "home": "Inicio de DopaBrain",
+    "objective": "¡Rompe todos los ladrillos! ¡No dejes caer la pelota!"
   },
   "screens": {
     "back": "← Atrás",

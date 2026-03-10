@@ -15,7 +15,8 @@
     "startGame": "Démarrer le Jeu",
     "stats": "📊 Statistiques",
     "hint": "Déplacez la raquette à la souris ou au toucher",
-    "home": "Accueil DopaBrain"
+    "home": "Accueil DopaBrain",
+    "objective": "Cassez toutes les briques ! Ne laissez pas la balle tomber !"
   },
   "screens": {
     "back": "← Retour",

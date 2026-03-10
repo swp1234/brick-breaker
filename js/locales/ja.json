@@ -15,7 +15,8 @@
     "startGame": "ゲーム開始",
     "stats": "📊 統計",
     "hint": "マウスまたはタッチでパドルを操作してください",
-    "home": "DopaBrain ホーム"
+    "home": "DopaBrain ホーム",
+    "objective": "全てのブロックを壊せ！ボールを落とすな！"
   },
   "screens": {
     "back": "← 戻る",

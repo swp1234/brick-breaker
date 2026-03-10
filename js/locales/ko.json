@@ -15,7 +15,8 @@
     "startGame": "게임 시작",
     "stats": "📊 통계",
     "hint": "마우스 또는 터치로 패들을 움직이세요",
-    "home": "DopaBrain 홈"
+    "home": "DopaBrain 홈",
+    "objective": "모든 벽돌을 깨세요! 공을 떨어뜨리지 마세요!"
   },
   "screens": {
     "back": "← 뒤로",

@@ -15,7 +15,8 @@
     "startGame": "Oyunu Başlat",
     "stats": "📊 İstatistikler",
     "hint": "Raket'i fare veya dokunuşla hareket ettirin",
-    "home": "DopaBrain Ana Sayfa"
+    "home": "DopaBrain Ana Sayfa",
+    "objective": "Tüm tuğlaları kırın! Topu düşürmeyin!"
   },
   "screens": {
     "back": "← Geri",

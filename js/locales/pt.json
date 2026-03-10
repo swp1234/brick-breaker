@@ -15,7 +15,8 @@
     "startGame": "Iniciar Jogo",
     "stats": "📊 Estatísticas",
     "hint": "Mova a raquete com o mouse ou toque",
-    "home": "Página Inicial DopaBrain"
+    "home": "Página Inicial DopaBrain",
+    "objective": "Quebre todos os tijolos! Não deixe a bola cair!"
   },
   "screens": {
     "back": "← Voltar",

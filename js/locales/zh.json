@@ -15,7 +15,8 @@
     "startGame": "开始游戏",
     "stats": "📊 统计",
     "hint": "用鼠标或触摸移动挡板",
-    "home": "DopaBrain 主页"
+    "home": "DopaBrain 主页",
+    "objective": "打碎所有砖块！别让球掉下去！"
   },
   "screens": {
     "back": "← 返回",
