@@ -892,33 +892,81 @@ class BrickBreakerGame {
 
     drawBrick(brick) {
         if (!brick.active) return;
+        const ctx = this.ctx;
+        const { x, y, width: w, height: h, color } = brick;
+        const m = 1;
 
-        this.ctx.fillStyle = brick.color;
-        this.ctx.shadowColor = `${brick.color}66`;
-        this.ctx.shadowBlur = 8;
-        this.ctx.fillRect(brick.x, brick.y, brick.width, brick.height);
-        this.ctx.shadowColor = 'transparent';
+        // Shadow
+        ctx.fillStyle = 'rgba(0,0,0,0.25)';
+        ctx.fillRect(x + 2, y + 2, w, h);
 
-        // Border
-        this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
-        this.ctx.lineWidth = 1;
-        this.ctx.strokeRect(brick.x, brick.y, brick.width, brick.height);
+        // Main fill with glow
+        ctx.shadowColor = color;
+        ctx.shadowBlur = 6;
+        ctx.fillStyle = color;
+        ctx.fillRect(x + m, y + m, w - m * 2, h - m * 2);
+        ctx.shadowBlur = 0;
 
-        // Health indicator for strong bricks
+        // Top-to-bottom gradient (3D depth)
+        const grad = ctx.createLinearGradient(x, y, x, y + h);
+        grad.addColorStop(0, 'rgba(255,255,255,0.35)');
+        grad.addColorStop(0.35, 'rgba(255,255,255,0.08)');
+        grad.addColorStop(0.7, 'rgba(0,0,0,0.05)');
+        grad.addColorStop(1, 'rgba(0,0,0,0.2)');
+        ctx.fillStyle = grad;
+        ctx.fillRect(x + m, y + m, w - m * 2, h - m * 2);
+
+        // Inner shine (radial highlight)
+        const sr = Math.min(w, h) * 0.4;
+        const shine = ctx.createRadialGradient(x + sr * 0.6, y + sr * 0.5, 0, x + sr, y + sr, sr);
+        shine.addColorStop(0, 'rgba(255,255,255,0.3)');
+        shine.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = shine;
+        ctx.fillRect(x + m, y + m, w - m * 2, h - m * 2);
+
+        // Top edge highlight
+        ctx.fillStyle = 'rgba(255,255,255,0.35)';
+        ctx.fillRect(x + m, y + m, w - m * 2, 2);
+
+        // Left edge highlight
+        ctx.fillStyle = 'rgba(255,255,255,0.15)';
+        ctx.fillRect(x + m, y + m, 2, h - m * 2);
+
+        // Bottom edge shadow
+        ctx.fillStyle = 'rgba(0,0,0,0.2)';
+        ctx.fillRect(x + m, y + h - 3, w - m * 2, 2);
+
+        // Right edge shadow
+        ctx.fillStyle = 'rgba(0,0,0,0.15)';
+        ctx.fillRect(x + w - 3, y + m, 2, h - m * 2);
+
+        // Unbreakable: metallic cross pattern
+        if (brick.type === 'UNBREAKABLE') {
+            ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(x + w * 0.25, y + 2);
+            ctx.lineTo(x + w * 0.25, y + h - 2);
+            ctx.moveTo(x + w * 0.75, y + 2);
+            ctx.lineTo(x + w * 0.75, y + h - 2);
+            ctx.stroke();
+        }
+
+        // Health indicator for strong bricks (cracks)
         if (brick.health > 1 && brick.health !== Infinity) {
-            this.ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-            this.ctx.font = '10px Arial';
-            this.ctx.textAlign = 'center';
-            this.ctx.fillText(brick.health, brick.x + brick.width / 2, brick.y + brick.height / 2 + 3);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+            ctx.font = 'bold 10px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(brick.health, x + w / 2, y + h / 2 + 3);
         }
 
         // Explosive brick indicator
         if (brick.type === 'EXPLOSIVE') {
             const pulse = Math.sin(Date.now() / 300) * 0.3 + 0.7;
-            this.ctx.fillStyle = `rgba(255,107,53,${pulse})`;
-            this.ctx.font = 'bold 12px sans-serif';
-            this.ctx.textAlign = 'center';
-            this.ctx.fillText('\u{1F4A5}', brick.x + brick.width / 2, brick.y + brick.height / 2 + 4);
+            ctx.fillStyle = `rgba(255,107,53,${pulse})`;
+            ctx.font = 'bold 12px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('\u{1F4A5}', x + w / 2, y + h / 2 + 4);
         }
     }
 
@@ -930,13 +978,50 @@ class BrickBreakerGame {
             [POWERUP_TYPES.LASER]: '#2ecc71',
             [POWERUP_TYPES.EXTRA_LIFE]: '#e74c3c'
         };
+        const icons = {
+            [POWERUP_TYPES.PADDLE_EXPAND]: '\u2194',
+            [POWERUP_TYPES.SLOW_BALL]: '\u23F3',
+            [POWERUP_TYPES.MULTI_BALL]: '\u2726',
+            [POWERUP_TYPES.LASER]: '\u26A1',
+            [POWERUP_TYPES.EXTRA_LIFE]: '\u2764'
+        };
 
+        const ctx = this.ctx;
         const color = colors[powerup.type];
-        this.ctx.fillStyle = color;
-        this.ctx.shadowColor = `${color}88`;
-        this.ctx.shadowBlur = 6;
-        this.ctx.fillRect(powerup.x - powerup.width / 2, powerup.y, powerup.width, powerup.height);
-        this.ctx.shadowColor = 'transparent';
+        const px = powerup.x - powerup.width / 2;
+        const py = powerup.y;
+        const pw = powerup.width;
+        const ph = powerup.height;
+
+        // Glow
+        ctx.shadowColor = color;
+        ctx.shadowBlur = 10;
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.roundRect(px, py, pw, ph, 4);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // Gradient overlay
+        const grad = ctx.createLinearGradient(px, py, px, py + ph);
+        grad.addColorStop(0, 'rgba(255,255,255,0.4)');
+        grad.addColorStop(0.5, 'rgba(255,255,255,0.05)');
+        grad.addColorStop(1, 'rgba(0,0,0,0.15)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.roundRect(px, py, pw, ph, 4);
+        ctx.fill();
+
+        // Icon
+        const icon = icons[powerup.type];
+        if (icon) {
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 11px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(icon, px + pw / 2, py + ph / 2);
+            ctx.textBaseline = 'alphabetic';
+        }
     }
 
     drawParticle(particle) {
