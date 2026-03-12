@@ -16,7 +16,8 @@
     "stats": "📊 Statistiques",
     "hint": "Déplacez la raquette à la souris ou au toucher",
     "home": "Accueil DopaBrain",
-    "objective": "Cassez toutes les briques ! Ne laissez pas la balle tomber !"
+    "objective": "Cassez toutes les briques ! Ne laissez pas la balle tomber !",
+    "resume": "Reprendre"
   },
   "screens": {
     "back": "← Retour",
@@ -25,7 +26,8 @@
   "game": {
     "tapToStart": "Appuyez pour commencer!",
     "back": "Accueil DopaBrain",
-    "gameOver": "Fin du Jeu"
+    "gameOver": "Fin du Jeu",
+    "combo": "COMBO"
   },
   "pause": {
     "title": "Pause",
@@ -58,6 +60,16 @@
     "strong": "Fort",
     "special": "Spécial",
     "unbreakable": "Indestructible"
+  },
+  "hud": {
+    "newBest": "🏆 NOUVEAU RECORD !",
+    "stage": "NIVEAU"
+  },
+  "leaderboard": {
+    "title": "🏆 Top 5",
+    "resetButton": "Réinitialiser",
+    "confirmReset": "Êtes-vous sûr de vouloir réinitialiser tous les records ?",
+    "resetSuccess": "Records réinitialisés !"
   },
   "share": {
     "twitter": "Twitter",

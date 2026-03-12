@@ -16,7 +16,8 @@
     "stats": "📊 İstatistikler",
     "hint": "Raket'i fare veya dokunuşla hareket ettirin",
     "home": "DopaBrain Ana Sayfa",
-    "objective": "Tüm tuğlaları kırın! Topu düşürmeyin!"
+    "objective": "Tüm tuğlaları kırın! Topu düşürmeyin!",
+    "resume": "Devam Et"
   },
   "screens": {
     "back": "← Geri",
@@ -25,7 +26,8 @@
   "game": {
     "tapToStart": "Başlamak için dokunun!",
     "back": "DopaBrain Ana Sayfa",
-    "gameOver": "Oyun Bitti"
+    "gameOver": "Oyun Bitti",
+    "combo": "KOMBO"
   },
   "pause": {
     "title": "Duraklat",
@@ -58,6 +60,16 @@
     "strong": "Güçlü",
     "special": "Özel",
     "unbreakable": "Kırılmaz"
+  },
+  "hud": {
+    "newBest": "🏆 YENİ REKOR!",
+    "stage": "AŞAMA"
+  },
+  "leaderboard": {
+    "title": "🏆 En İyi 5",
+    "resetButton": "Kayıtları Sıfırla",
+    "confirmReset": "Tüm kayıtları sıfırlamak istediğinize emin misiniz?",
+    "resetSuccess": "Kayıtlar sıfırlandı!"
   },
   "share": {
     "twitter": "Twitter",

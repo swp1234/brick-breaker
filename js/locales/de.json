@@ -16,7 +16,8 @@
     "stats": "📊 Statistik",
     "hint": "Bewegen Sie den Schläger mit Maus oder Berührung",
     "home": "DopaBrain Startseite",
-    "objective": "Zerstöre alle Steine! Lass den Ball nicht fallen!"
+    "objective": "Zerstöre alle Steine! Lass den Ball nicht fallen!",
+    "resume": "Fortsetzen"
   },
   "screens": {
     "back": "← Zurück",
@@ -25,7 +26,8 @@
   "game": {
     "tapToStart": "Tippen zum Starten!",
     "back": "DopaBrain Startseite",
-    "gameOver": "Spiel Vorbei"
+    "gameOver": "Spiel Vorbei",
+    "combo": "KOMBO"
   },
   "pause": {
     "title": "Pause",
@@ -58,6 +60,16 @@
     "strong": "Stark",
     "special": "Spezial",
     "unbreakable": "Unzerstörbar"
+  },
+  "hud": {
+    "newBest": "🏆 NEUER REKORD!",
+    "stage": "STUFE"
+  },
+  "leaderboard": {
+    "title": "🏆 Top 5",
+    "resetButton": "Rekorde zurücksetzen",
+    "confirmReset": "Möchten Sie alle Rekorde zurücksetzen?",
+    "resetSuccess": "Rekorde zurückgesetzt!"
   },
   "share": {
     "twitter": "Twitter",

@@ -16,7 +16,8 @@
     "stats": "📊 Statistik",
     "hint": "Gerakkan dayung dengan mouse atau sentuhan",
     "home": "Beranda DopaBrain",
-    "objective": "Pecahkan semua batu bata! Jangan biarkan bola jatuh!"
+    "objective": "Pecahkan semua batu bata! Jangan biarkan bola jatuh!",
+    "resume": "Lanjut"
   },
   "screens": {
     "back": "← Kembali",
@@ -25,7 +26,8 @@
   "game": {
     "tapToStart": "Ketuk untuk memulai!",
     "back": "Beranda DopaBrain",
-    "gameOver": "Permainan Berakhir"
+    "gameOver": "Permainan Berakhir",
+    "combo": "KOMBO"
   },
   "pause": {
     "title": "Jeda",
@@ -58,6 +60,16 @@
     "strong": "Kuat",
     "special": "Istimewa",
     "unbreakable": "Tak Terpisahkan"
+  },
+  "hud": {
+    "newBest": "🏆 REKOR BARU!",
+    "stage": "LEVEL"
+  },
+  "leaderboard": {
+    "title": "🏆 5 Teratas",
+    "resetButton": "Reset Rekor",
+    "confirmReset": "Yakin ingin mereset semua rekor?",
+    "resetSuccess": "Rekor direset!"
   },
   "share": {
     "twitter": "Twitter",

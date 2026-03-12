@@ -16,7 +16,8 @@
     "stats": "📊 统计",
     "hint": "用鼠标或触摸移动挡板",
     "home": "DopaBrain 主页",
-    "objective": "打碎所有砖块！别让球掉下去！"
+    "objective": "打碎所有砖块！别让球掉下去！",
+    "resume": "继续"
   },
   "screens": {
     "back": "← 返回",
@@ -25,7 +26,8 @@
   "game": {
     "tapToStart": "点击开始！",
     "back": "DopaBrain 主页",
-    "gameOver": "游戏结束"
+    "gameOver": "游戏结束",
+    "combo": "连击"
   },
   "pause": {
     "title": "暂停",
@@ -58,6 +60,16 @@
     "strong": "强化",
     "special": "特殊",
     "unbreakable": "不可破坏"
+  },
+  "hud": {
+    "newBest": "🏆 新纪录！",
+    "stage": "关卡"
+  },
+  "leaderboard": {
+    "title": "🏆 前5名",
+    "resetButton": "重置记录",
+    "confirmReset": "确定要重置所有记录吗？",
+    "resetSuccess": "记录已重置！"
   },
   "share": {
     "twitter": "推特",

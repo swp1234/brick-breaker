@@ -16,7 +16,8 @@
     "stats": "📊 Estadísticas",
     "hint": "Mueve la paleta con el ratón o el toque",
     "home": "Inicio de DopaBrain",
-    "objective": "¡Rompe todos los ladrillos! ¡No dejes caer la pelota!"
+    "objective": "¡Rompe todos los ladrillos! ¡No dejes caer la pelota!",
+    "resume": "Continuar"
   },
   "screens": {
     "back": "← Atrás",
@@ -25,7 +26,8 @@
   "game": {
     "tapToStart": "¡Toca para iniciar!",
     "back": "Inicio de DopaBrain",
-    "gameOver": "Fin del Juego"
+    "gameOver": "Fin del Juego",
+    "combo": "COMBO"
   },
   "pause": {
     "title": "Pausa",
@@ -58,6 +60,16 @@
     "strong": "Fuerte",
     "special": "Especial",
     "unbreakable": "Irrompible"
+  },
+  "hud": {
+    "newBest": "🏆 ¡NUEVO RÉCORD!",
+    "stage": "NIVEL"
+  },
+  "leaderboard": {
+    "title": "🏆 Top 5",
+    "resetButton": "Reiniciar récords",
+    "confirmReset": "¿Seguro que quieres reiniciar todos los récords?",
+    "resetSuccess": "¡Récords reiniciados!"
   },
   "share": {
     "twitter": "Twitter",

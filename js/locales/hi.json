@@ -16,7 +16,8 @@
     "stats": "📊 सांख्यिकी",
     "hint": "माउस या टच से पैडल को हिलाएं",
     "home": "DopaBrain होम",
-    "objective": "सभी ईंटें तोड़ो! गेंद को गिरने मत दो!"
+    "objective": "सभी ईंटें तोड़ो! गेंद को गिरने मत दो!",
+    "resume": "जारी रखें"
   },
   "screens": {
     "back": "← वापस जाएं",
@@ -25,7 +26,8 @@
   "game": {
     "tapToStart": "शुरू करने के लिए टैप करें!",
     "back": "DopaBrain होम",
-    "gameOver": "गेम खत्म"
+    "gameOver": "गेम खत्म",
+    "combo": "कॉम्बो"
   },
   "pause": {
     "title": "रोकें",
@@ -58,6 +60,16 @@
     "strong": "मजबूत",
     "special": "विशेष",
     "unbreakable": "अटूट"
+  },
+  "hud": {
+    "newBest": "🏆 नया रिकॉर्ड!",
+    "stage": "स्टेज"
+  },
+  "leaderboard": {
+    "title": "🏆 शीर्ष 5",
+    "resetButton": "रिकॉर्ड रीसेट",
+    "confirmReset": "क्या आप सभी रिकॉर्ड रीसेट करना चाहते हैं?",
+    "resetSuccess": "रिकॉर्ड रीसेट!"
   },
   "share": {
     "twitter": "ट्विटर",

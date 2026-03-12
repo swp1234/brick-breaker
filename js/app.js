@@ -649,7 +649,7 @@ class BrickBreakerGame {
             el.style.cssText = 'position:fixed;top:20%;left:50%;transform:translate(-50%,-50%) scale(0);font-size:32px;font-weight:800;color:#fbbf24;text-shadow:0 0 30px rgba(251,191,36,0.6);pointer-events:none;z-index:200;transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1),opacity 0.4s;opacity:0;white-space:nowrap;';
             document.body.appendChild(el);
         }
-        el.textContent = '\u{1F3C6} NEW BEST!';
+        el.textContent = window.i18n?.t('hud.newBest') || '\u{1F3C6} NEW BEST!';
         el.style.transform = 'translate(-50%,-50%) scale(1.2)';
         el.style.opacity = '1';
         setTimeout(() => {
@@ -834,7 +834,7 @@ class BrickBreakerGame {
             this.ctx.font = `bold ${Math.min(24 + this.combo, 40)}px -apple-system, sans-serif`;
             this.ctx.textAlign = 'center';
             this.ctx.globalAlpha = 0.8;
-            this.ctx.fillText(`${this.combo}x COMBO`, GAME_CONFIG.CANVAS_WIDTH / 2, GAME_CONFIG.CANVAS_HEIGHT / 2);
+            this.ctx.fillText(`${this.combo}x ${window.i18n?.t('game.combo') || 'COMBO'}`, GAME_CONFIG.CANVAS_WIDTH / 2, GAME_CONFIG.CANVAS_HEIGHT / 2);
             this.ctx.globalAlpha = 1;
         }
 
@@ -1085,7 +1085,7 @@ class BrickBreakerGame {
     }
 
     updateHUD() {
-        document.getElementById('hud-stage').textContent = `STAGE ${this.currentStage}`;
+        document.getElementById('hud-stage').textContent = `${window.i18n?.t('hud.stage') || 'STAGE'} ${this.currentStage}`;
         document.getElementById('hud-score').textContent = this.score;
 
         const hearts = '❤️'.repeat(Math.max(0, this.lives));
@@ -1115,7 +1115,7 @@ class BrickBreakerGame {
         if (resumeBtn) {
             if (savedState) {
                 resumeBtn.classList.remove('hidden');
-                resumeBtn.textContent = `Resume (Stage ${savedState.currentStage})`;
+                resumeBtn.textContent = (window.i18n?.t('menu.resume') || 'Resume') + ' (' + (window.i18n?.t('hud.stage') || 'Stage') + ' ' + savedState.currentStage + ')';
             } else {
                 resumeBtn.classList.add('hidden');
             }
@@ -1263,7 +1263,7 @@ BrickBreakerGame.prototype.displayLeaderboard = function(leaderboardResult) {
     const topScores = this.leaderboard.getTopScores(5);
     const currentScore = parseInt(document.getElementById('go-score').textContent);
 
-    let html = '<div class="leaderboard-title">🏆 Top 5 Scores</div>';
+    let html = '<div class="leaderboard-title">' + (window.i18n?.t('leaderboard.title') || '🏆 Top 5 Scores') + '</div>';
     html += '<div class="leaderboard-list">';
 
     topScores.forEach((entry, index) => {
@@ -1281,19 +1281,19 @@ BrickBreakerGame.prototype.displayLeaderboard = function(leaderboardResult) {
     });
 
     html += '</div>';
-    html += '<button id="reset-leaderboard-btn" class="reset-btn">Reset Records</button>';
+    html += '<button id="reset-leaderboard-btn" class="reset-btn">' + (window.i18n?.t('leaderboard.resetButton') || 'Reset Records') + '</button>';
 
     leaderboardContainer.innerHTML = html;
 
     const resetBtn = leaderboardContainer.querySelector('#reset-leaderboard-btn');
     if (resetBtn) {
         resetBtn.addEventListener('click', () => {
-            if (confirm('Are you sure you want to reset all records?')) {
+            if (confirm(window.i18n?.t('leaderboard.confirmReset') || 'Are you sure you want to reset all records?')) {
                 this.leaderboard.resetScores();
                 this.highScore = 0;
                 localStorage.setItem('bb_highscore', '0');
                 this.displayLeaderboard({ isNewRecord: false, rank: -1, notifications: [] });
-                alert('Records reset!');
+                alert(window.i18n?.t('leaderboard.resetSuccess') || 'Records reset!');
             }
         });
     }

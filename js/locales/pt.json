@@ -16,7 +16,8 @@
     "stats": "📊 Estatísticas",
     "hint": "Mova a raquete com o mouse ou toque",
     "home": "Página Inicial DopaBrain",
-    "objective": "Quebre todos os tijolos! Não deixe a bola cair!"
+    "objective": "Quebre todos os tijolos! Não deixe a bola cair!",
+    "resume": "Continuar"
   },
   "screens": {
     "back": "← Voltar",
@@ -25,7 +26,8 @@
   "game": {
     "tapToStart": "Toque para começar!",
     "back": "Página Inicial DopaBrain",
-    "gameOver": "Fim do Jogo"
+    "gameOver": "Fim do Jogo",
+    "combo": "COMBO"
   },
   "pause": {
     "title": "Pausa",
@@ -58,6 +60,16 @@
     "strong": "Forte",
     "special": "Especial",
     "unbreakable": "Indestrutível"
+  },
+  "hud": {
+    "newBest": "🏆 NOVO RECORDE!",
+    "stage": "FASE"
+  },
+  "leaderboard": {
+    "title": "🏆 Top 5",
+    "resetButton": "Redefinir registros",
+    "confirmReset": "Tem certeza que deseja redefinir todos os registros?",
+    "resetSuccess": "Registros redefinidos!"
   },
   "share": {
     "twitter": "Twitter",

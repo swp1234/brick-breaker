@@ -16,7 +16,8 @@
     "stats": "📊 Stats",
     "hint": "Move paddle with mouse or touch",
     "home": "DopaBrain Home",
-    "objective": "Break all the bricks! Don't let the ball fall!"
+    "objective": "Break all the bricks! Don't let the ball fall!",
+    "resume": "Resume"
   },
   "screens": {
     "back": "← Back",
@@ -25,7 +26,8 @@
   "game": {
     "tapToStart": "Tap to start!",
     "back": "DopaBrain Home",
-    "gameOver": "Game Over"
+    "gameOver": "Game Over",
+    "combo": "COMBO"
   },
   "pause": {
     "title": "Paused",
@@ -58,6 +60,16 @@
     "strong": "Strong",
     "special": "Special",
     "unbreakable": "Unbreakable"
+  },
+  "hud": {
+    "newBest": "🏆 NEW BEST!",
+    "stage": "STAGE"
+  },
+  "leaderboard": {
+    "title": "🏆 Top 5 Scores",
+    "resetButton": "Reset Records",
+    "confirmReset": "Are you sure you want to reset all records?",
+    "resetSuccess": "Records reset!"
   },
   "share": {
     "twitter": "Twitter",

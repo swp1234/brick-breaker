@@ -16,7 +16,8 @@
     "stats": "📊 統計",
     "hint": "マウスまたはタッチでパドルを操作してください",
     "home": "DopaBrain ホーム",
-    "objective": "全てのブロックを壊せ！ボールを落とすな！"
+    "objective": "全てのブロックを壊せ！ボールを落とすな！",
+    "resume": "続ける"
   },
   "screens": {
     "back": "← 戻る",
@@ -25,7 +26,8 @@
   "game": {
     "tapToStart": "タップして開始！",
     "back": "DopaBrain ホーム",
-    "gameOver": "ゲームオーバー"
+    "gameOver": "ゲームオーバー",
+    "combo": "コンボ"
   },
   "pause": {
     "title": "一時停止",
@@ -58,6 +60,16 @@
     "strong": "強化",
     "special": "特殊",
     "unbreakable": "破壊不可"
+  },
+  "hud": {
+    "newBest": "🏆 最高記録！",
+    "stage": "ステージ"
+  },
+  "leaderboard": {
+    "title": "🏆 トップ5",
+    "resetButton": "記録リセット",
+    "confirmReset": "すべての記録をリセットしますか？",
+    "resetSuccess": "記録がリセットされました！"
   },
   "share": {
     "twitter": "Twitter",
