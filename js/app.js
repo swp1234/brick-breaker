@@ -40,7 +40,10 @@ const POWERUP_TYPES = {
     SLOW_BALL: 'slowBall',
     MULTI_BALL: 'multiBall',
     LASER: 'laser',
-    EXTRA_LIFE: 'extraLife'
+    EXTRA_LIFE: 'extraLife',
+    FIREBALL: 'fireball',
+    SHIELD: 'shield',
+    MAGNET: 'magnet'
 };
 
 // Preload image assets
@@ -113,6 +116,9 @@ class BrickBreakerGame {
         this.powerups = [];
         this.particles = [];
         this.laser = null;
+        this.fireball = null;
+        this.shield = null;
+        this.magnet = null;
 
         // Combo system
         this.combo = 0;
@@ -214,6 +220,9 @@ class BrickBreakerGame {
         this.balls = [];
         this.powerups = [];
         this.laser = null;
+        this.fireball = null;
+        this.shield = null;
+        this.magnet = null;
         this.combo = 0;
         this.maxCombo = 0;
         this.floatingTexts = [];
@@ -382,8 +391,16 @@ class BrickBreakerGame {
                     if (window.sfx) window.sfx.playWallSound();
                 }
 
-                // Bottom boundary (lose life)
+                // Bottom boundary (lose life or shield bounce)
                 if (ball.y - ball.radius > GAME_CONFIG.CANVAS_HEIGHT) {
+                    if (this.shield && this.shield.active && this.shield.hits > 0) {
+                        ball.vy = -Math.abs(ball.vy);
+                        ball.y = GAME_CONFIG.CANVAS_HEIGHT - ball.radius;
+                        this.shield.hits--;
+                        if (this.shield.hits <= 0) this.shield.active = false;
+                        if (window.sfx) window.sfx.playWallSound();
+                        return true;
+                    }
                     return false; // Remove ball
                 }
 
@@ -443,6 +460,17 @@ class BrickBreakerGame {
             ball.x > paddle.x &&
             ball.x < paddle.x + paddle.width) {
 
+            // Magnet: stick ball to paddle
+            if (this.magnet && this.magnet.active && !ball.onPaddle) {
+                ball.onPaddle = true;
+                ball.magnetStuck = true;
+                ball.y = paddle.y - ball.radius;
+                ball.vx = 0;
+                ball.vy = 0;
+                if (window.sfx) window.sfx.playPaddleSound();
+                return;
+            }
+
             ball.vy = -Math.abs(ball.vy);
             const hitPos = (ball.x - paddle.x) / paddle.width - 0.5;
             ball.vx += hitPos * 3;
@@ -481,15 +509,19 @@ class BrickBreakerGame {
 
                 const minOverlap = Math.min(overlapLeft, overlapRight, overlapTop, overlapBottom);
 
-                if (minOverlap === overlapLeft || minOverlap === overlapRight) {
-                    ball.vx *= -1;
-                } else {
-                    ball.vy *= -1;
+                // Fireball passes through without bouncing
+                const isFireball = this.fireball && this.fireball.active;
+                if (!isFireball) {
+                    if (minOverlap === overlapLeft || minOverlap === overlapRight) {
+                        ball.vx *= -1;
+                    } else {
+                        ball.vy *= -1;
+                    }
                 }
 
-                // Damage brick
+                // Damage brick (fireball deals 2x damage)
                 const originalHealth = brick.health;
-                brick.health--;
+                brick.health -= isFireball ? 2 : 1;
                 if (brick.health <= 0) {
                     brick.active = false;
                     this.combo++;
@@ -621,6 +653,15 @@ class BrickBreakerGame {
                 break;
             case POWERUP_TYPES.EXTRA_LIFE:
                 this.lives = Math.min(this.lives + 1, 5);
+                break;
+            case POWERUP_TYPES.FIREBALL:
+                this.fireball = { active: true, time: 300 };
+                break;
+            case POWERUP_TYPES.SHIELD:
+                this.shield = { active: true, hits: 3 };
+                break;
+            case POWERUP_TYPES.MAGNET:
+                this.magnet = { active: true, time: 400 };
                 break;
         }
         this.score += 50;
@@ -813,6 +854,50 @@ class BrickBreakerGame {
             if (this.laser.time <= 0) this.laser.active = false;
         }
 
+        // Fireball timer & visual
+        if (this.fireball && this.fireball.active) {
+            this.fireball.time--;
+            if (this.fireball.time <= 0) this.fireball.active = false;
+            // Draw fire trail on balls
+            this.balls.forEach(b => {
+                if (b.onPaddle) return;
+                const grd = this.ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.radius * 2.5);
+                grd.addColorStop(0, 'rgba(255,165,0,0.6)');
+                grd.addColorStop(0.5, 'rgba(255,69,0,0.3)');
+                grd.addColorStop(1, 'rgba(255,0,0,0)');
+                this.ctx.fillStyle = grd;
+                this.ctx.beginPath();
+                this.ctx.arc(b.x, b.y, b.radius * 2.5, 0, Math.PI * 2);
+                this.ctx.fill();
+            });
+        }
+
+        // Shield visual
+        if (this.shield && this.shield.active) {
+            const sy = GAME_CONFIG.CANVAS_HEIGHT - 3;
+            const alpha = 0.3 + Math.sin(Date.now() / 200) * 0.15;
+            this.ctx.strokeStyle = `rgba(0,200,255,${alpha})`;
+            this.ctx.lineWidth = 3;
+            this.ctx.shadowColor = '#00c8ff';
+            this.ctx.shadowBlur = 8;
+            this.ctx.beginPath();
+            this.ctx.moveTo(0, sy);
+            this.ctx.lineTo(GAME_CONFIG.CANVAS_WIDTH, sy);
+            this.ctx.stroke();
+            this.ctx.shadowBlur = 0;
+            // Shield hits indicator
+            this.ctx.fillStyle = '#00c8ff';
+            this.ctx.font = 'bold 10px sans-serif';
+            this.ctx.textAlign = 'right';
+            this.ctx.fillText(`\u{1F6E1} ${this.shield.hits}`, GAME_CONFIG.CANVAS_WIDTH - 8, sy - 6);
+        }
+
+        // Magnet timer
+        if (this.magnet && this.magnet.active) {
+            this.magnet.time--;
+            if (this.magnet.time <= 0) this.magnet.active = false;
+        }
+
         // Draw floating texts
         for (let i = this.floatingTexts.length - 1; i >= 0; i--) {
             const ft = this.floatingTexts[i];
@@ -976,14 +1061,20 @@ class BrickBreakerGame {
             [POWERUP_TYPES.SLOW_BALL]: '#9b59b6',
             [POWERUP_TYPES.MULTI_BALL]: '#e91e63',
             [POWERUP_TYPES.LASER]: '#2ecc71',
-            [POWERUP_TYPES.EXTRA_LIFE]: '#e74c3c'
+            [POWERUP_TYPES.EXTRA_LIFE]: '#e74c3c',
+            [POWERUP_TYPES.FIREBALL]: '#ff6b00',
+            [POWERUP_TYPES.SHIELD]: '#00c8ff',
+            [POWERUP_TYPES.MAGNET]: '#f1c40f'
         };
         const icons = {
             [POWERUP_TYPES.PADDLE_EXPAND]: '\u2194',
             [POWERUP_TYPES.SLOW_BALL]: '\u23F3',
             [POWERUP_TYPES.MULTI_BALL]: '\u2726',
             [POWERUP_TYPES.LASER]: '\u26A1',
-            [POWERUP_TYPES.EXTRA_LIFE]: '\u2764'
+            [POWERUP_TYPES.EXTRA_LIFE]: '\u2764',
+            [POWERUP_TYPES.FIREBALL]: '\u{1F525}',
+            [POWERUP_TYPES.SHIELD]: '\u{1F6E1}',
+            [POWERUP_TYPES.MAGNET]: '\u{1F9F2}'
         };
 
         const ctx = this.ctx;
