@@ -1578,9 +1578,13 @@ class BrickBreakerGame {
 
     startGameLoop() {
         const gameLoop = () => {
-            this.update();
-            if (this.state === GAME_STATES.GAME) {
-                this.render();
+            try {
+                this.update();
+                if (this.state === GAME_STATES.GAME) {
+                    this.render();
+                }
+            } catch (e) {
+                console.error('Game loop error:', e);
             }
             requestAnimationFrame(gameLoop);
         };
