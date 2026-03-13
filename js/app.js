@@ -1181,6 +1181,26 @@ class BrickBreakerGame {
 
         const hearts = '❤️'.repeat(Math.max(0, this.lives));
         document.getElementById('hud-lives').textContent = hearts;
+
+        // Brick progress bar
+        let progressEl = document.getElementById('brick-progress');
+        if (!progressEl) {
+            progressEl = document.createElement('div');
+            progressEl.id = 'brick-progress';
+            progressEl.style.cssText = 'position:absolute;bottom:0;left:0;width:100%;height:3px;background:rgba(255,255,255,0.1);pointer-events:none;z-index:10;';
+            const fill = document.createElement('div');
+            fill.id = 'brick-progress-fill';
+            fill.style.cssText = 'height:100%;background:linear-gradient(90deg,#10b981,#fbbf24);transition:width 0.3s ease;border-radius:0 2px 2px 0;';
+            progressEl.appendChild(fill);
+            const gameScreen = document.getElementById('game-screen') || document.querySelector('canvas')?.parentElement;
+            if (gameScreen) { gameScreen.style.position = 'relative'; gameScreen.appendChild(progressEl); }
+        }
+        const fillEl = document.getElementById('brick-progress-fill');
+        if (fillEl && this.bricks) {
+            const total = this.bricks.length;
+            const cleared = this.bricks.filter(b => !b.active).length;
+            fillEl.style.width = total > 0 ? ((cleared / total) * 100) + '%' : '0%';
+        }
     }
 
     togglePause() {
