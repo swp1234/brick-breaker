@@ -27,7 +27,10 @@
     "tapToStart": "Ketuk untuk memulai!",
     "back": "Beranda DopaBrain",
     "gameOver": "Permainan Berakhir",
-    "combo": "KOMBO"
+    "combo": "KOMBO",
+    "streak": "BERUNTUN",
+    "multiplier": "KALI",
+    "stageClear": "SELESAI!"
   },
   "pause": {
     "title": "Jeda",
@@ -42,6 +45,8 @@
     "newRecord": "🎉 Rekor Baru!",
     "revive": "Tonton iklan untuk menghidupkan kembali",
     "retry": "Mainkan Lagi",
+    "retryHint": "(Enter)",
+    "bestStreak": "Beruntun Terbaik",
     "share": "📤 Bagikan",
     "menu": "🏠 Menu"
   },
@@ -53,7 +58,10 @@
     "slowBall": "Bola Lambat",
     "multiBall": "Bola Ganda",
     "laser": "Laser",
-    "extraLife": "Nyawa Ekstra"
+    "extraLife": "Nyawa Ekstra",
+    "fireball": "Bola Api",
+    "shield": "Perisai",
+    "magnet": "Magnet"
   },
   "brickTypes": {
     "normal": "Normal",

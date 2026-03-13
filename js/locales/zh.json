@@ -27,7 +27,10 @@
     "tapToStart": "点击开始！",
     "back": "DopaBrain 主页",
     "gameOver": "游戏结束",
-    "combo": "连击"
+    "combo": "连击",
+    "streak": "连续",
+    "multiplier": "倍率",
+    "stageClear": "通关!"
   },
   "pause": {
     "title": "暂停",
@@ -42,6 +45,8 @@
     "newRecord": "🎉 新纪录！",
     "revive": "看广告重新开始",
     "retry": "重新开始",
+    "retryHint": "(Enter)",
+    "bestStreak": "最佳连续",
     "share": "📤 分享",
     "menu": "🏠 菜单"
   },
@@ -53,7 +58,10 @@
     "slowBall": "减速球",
     "multiBall": "多球",
     "laser": "激光",
-    "extraLife": "额外生命"
+    "extraLife": "额外生命",
+    "fireball": "火球",
+    "shield": "护盾",
+    "magnet": "磁铁"
   },
   "brickTypes": {
     "normal": "普通",

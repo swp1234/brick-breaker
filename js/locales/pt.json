@@ -27,7 +27,10 @@
     "tapToStart": "Toque para começar!",
     "back": "Página Inicial DopaBrain",
     "gameOver": "Fim do Jogo",
-    "combo": "COMBO"
+    "combo": "COMBO",
+    "streak": "SEQUENCIA",
+    "multiplier": "MULT",
+    "stageClear": "COMPLETO!"
   },
   "pause": {
     "title": "Pausa",
@@ -42,6 +45,8 @@
     "newRecord": "🎉 Novo Recorde!",
     "revive": "Assista um anúncio para reviver",
     "retry": "Jogar Novamente",
+    "retryHint": "(Enter)",
+    "bestStreak": "Melhor Sequencia",
     "share": "📤 Compartilhar",
     "menu": "🏠 Menu"
   },
@@ -53,7 +58,10 @@
     "slowBall": "Bola Lenta",
     "multiBall": "Multi Bola",
     "laser": "Laser",
-    "extraLife": "Vida Extra"
+    "extraLife": "Vida Extra",
+    "fireball": "Bola de Fogo",
+    "shield": "Escudo",
+    "magnet": "Imã"
   },
   "brickTypes": {
     "normal": "Normal",

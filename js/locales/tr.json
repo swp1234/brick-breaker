@@ -27,7 +27,10 @@
     "tapToStart": "Başlamak için dokunun!",
     "back": "DopaBrain Ana Sayfa",
     "gameOver": "Oyun Bitti",
-    "combo": "KOMBO"
+    "combo": "KOMBO",
+    "streak": "SERİ",
+    "multiplier": "CARP",
+    "stageClear": "TAMAM!"
   },
   "pause": {
     "title": "Duraklat",
@@ -42,6 +45,8 @@
     "newRecord": "🎉 Yeni Rekor!",
     "revive": "İhya etmek için reklam izleyin",
     "retry": "Tekrar Oyna",
+    "retryHint": "(Enter)",
+    "bestStreak": "En İyi Seri",
     "share": "📤 Paylaş",
     "menu": "🏠 Menü"
   },
@@ -53,7 +58,10 @@
     "slowBall": "Yavaş Top",
     "multiBall": "Çoklu Top",
     "laser": "Lazer",
-    "extraLife": "Ekstra Yaşam"
+    "extraLife": "Ekstra Yaşam",
+    "fireball": "Ateş Topu",
+    "shield": "Kalkan",
+    "magnet": "Mıknatıs"
   },
   "brickTypes": {
     "normal": "Normal",

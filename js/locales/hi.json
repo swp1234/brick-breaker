@@ -27,7 +27,10 @@
     "tapToStart": "शुरू करने के लिए टैप करें!",
     "back": "DopaBrain होम",
     "gameOver": "गेम खत्म",
-    "combo": "कॉम्बो"
+    "combo": "कॉम्बो",
+    "streak": "लगातार",
+    "multiplier": "गुणक",
+    "stageClear": "क्लियर!"
   },
   "pause": {
     "title": "रोकें",
@@ -42,6 +45,8 @@
     "newRecord": "🎉 नया रिकॉर्ड!",
     "revive": "विज्ञापन देखकर फिर से शुरू करें",
     "retry": "फिर से खेलें",
+    "retryHint": "(Enter)",
+    "bestStreak": "सर्वश्रेष्ठ लगातार",
     "share": "📤 साझा करें",
     "menu": "🏠 मेनू"
   },
@@ -53,7 +58,10 @@
     "slowBall": "धीमी गेंद",
     "multiBall": "बहु गेंद",
     "laser": "लेजर",
-    "extraLife": "अतिरिक्त जीवन"
+    "extraLife": "अतिरिक्त जीवन",
+    "fireball": "आग का गोला",
+    "shield": "ढाल",
+    "magnet": "चुंबक"
   },
   "brickTypes": {
     "normal": "सामान्य",

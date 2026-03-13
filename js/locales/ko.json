@@ -27,7 +27,10 @@
     "tapToStart": "탭하여 시작!",
     "back": "DopaBrain 홈",
     "gameOver": "게임 오버",
-    "combo": "콤보"
+    "combo": "콤보",
+    "streak": "연속",
+    "multiplier": "배율",
+    "stageClear": "클리어!"
   },
   "pause": {
     "title": "일시정지",
@@ -42,6 +45,8 @@
     "newRecord": "🎉 새 기록!",
     "revive": "광고 보고 부활하기",
     "retry": "다시 하기",
+    "retryHint": "(Enter)",
+    "bestStreak": "최고 연속",
     "share": "📤 공유",
     "menu": "🏠 메뉴"
   },
@@ -53,7 +58,10 @@
     "slowBall": "공 속도 감소",
     "multiBall": "멀티볼",
     "laser": "레이저",
-    "extraLife": "추가 생명"
+    "extraLife": "추가 생명",
+    "fireball": "파이어볼",
+    "shield": "방패",
+    "magnet": "자석"
   },
   "brickTypes": {
     "normal": "일반",

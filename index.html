@@ -226,9 +226,15 @@
                     </div>
                 </div>
 
-                <div class="go-stage" id="go-stage">
-                    <span class="stage-label" data-i18n="gameover.stage">스테이지</span>
-                    <span class="stage-value">1</span>
+                <div class="go-stats-row">
+                    <div class="go-stage" id="go-stage">
+                        <span class="stage-label" data-i18n="gameover.stage">스테이지</span>
+                        <span class="stage-value">1</span>
+                    </div>
+                    <div class="go-streak hidden" id="go-streak">
+                        <span class="streak-label" data-i18n="gameover.bestStreak">최고 연속</span>
+                        <span class="streak-value">0</span>
+                    </div>
                 </div>
 
                 <div class="go-new-record hidden" id="go-new-record" data-i18n="gameover.newRecord">🎉 새 기록!</div>
@@ -238,8 +244,9 @@
                         <span class="revive-icon">📺</span>
                         <span data-i18n="gameover.revive">광고 보고 부활하기</span>
                     </button>
-                    <button class="btn-primary btn-retry" id="btn-retry">
+                    <button class="btn-primary btn-retry" id="btn-retry" autofocus>
                         <span data-i18n="gameover.retry">다시 하기</span>
+                        <span class="retry-hint" data-i18n="gameover.retryHint">(Enter)</span>
                     </button>
                     <div class="go-sub-buttons">
                         <button class="btn-share" id="btn-share" data-i18n="gameover.share">📤 공유</button>

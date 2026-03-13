@@ -27,7 +27,10 @@
     "tapToStart": "Нажмите, чтобы начать!",
     "back": "Главная DopaBrain",
     "gameOver": "Конец игры",
-    "combo": "КОМБО"
+    "combo": "КОМБО",
+    "streak": "СЕРИЯ",
+    "multiplier": "МНОЖ",
+    "stageClear": "ПРОЙДЕНО!"
   },
   "pause": {
     "title": "Пауза",
@@ -42,6 +45,8 @@
     "newRecord": "🎉 Новый рекорд!",
     "revive": "Посмотрите объявление чтобы возродиться",
     "retry": "Играть снова",
+    "retryHint": "(Enter)",
+    "bestStreak": "Лучшая серия",
     "share": "📤 Поделиться",
     "menu": "🏠 Меню"
   },
@@ -53,7 +58,10 @@
     "slowBall": "Медленный мяч",
     "multiBall": "Множественные мячи",
     "laser": "Лазер",
-    "extraLife": "Дополнительная жизнь"
+    "extraLife": "Дополнительная жизнь",
+    "fireball": "Огненный шар",
+    "shield": "Щит",
+    "magnet": "Магнит"
   },
   "brickTypes": {
     "normal": "Обычный",

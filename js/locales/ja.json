@@ -27,7 +27,10 @@
     "tapToStart": "タップして開始！",
     "back": "DopaBrain ホーム",
     "gameOver": "ゲームオーバー",
-    "combo": "コンボ"
+    "combo": "コンボ",
+    "streak": "連続",
+    "multiplier": "倍率",
+    "stageClear": "クリア!"
   },
   "pause": {
     "title": "一時停止",
@@ -42,6 +45,8 @@
     "newRecord": "🎉 新記録！",
     "revive": "広告を見て復活する",
     "retry": "もう一度プレイ",
+    "retryHint": "(Enter)",
+    "bestStreak": "最高連続",
     "share": "📤 シェア",
     "menu": "🏠 メニュー"
   },
@@ -53,7 +58,10 @@
     "slowBall": "遅いボール",
     "multiBall": "マルチボール",
     "laser": "レーザー",
-    "extraLife": "追加ライフ"
+    "extraLife": "追加ライフ",
+    "fireball": "ファイアボール",
+    "shield": "シールド",
+    "magnet": "マグネット"
   },
   "brickTypes": {
     "normal": "通常",

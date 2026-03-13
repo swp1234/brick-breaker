@@ -1190,6 +1190,11 @@ body {
     color: var(--primary);
 }
 
+[data-theme="light"] .go-streak {
+    background: rgba(72, 219, 251, 0.08);
+    border-color: rgba(72, 219, 251, 0.15);
+}
+
 /* Theme Toggle */
 .theme-toggle {
     position: fixed;
@@ -1234,6 +1239,107 @@ input:focus-visible,
 [role="button"]:focus-visible {
     outline: 3px solid #e74c3c;
     outline-offset: 2px;
+}
+
+/* === LEVEL BANNER === */
+#level-banner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    pointer-events: none;
+    text-align: center;
+    opacity: 0;
+}
+
+#level-banner.level-banner-show {
+    opacity: 1;
+    animation: bannerIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+#level-banner.level-banner-hide {
+    animation: bannerOut 0.5s ease-in forwards;
+}
+
+.lb-stage {
+    font-size: 42px;
+    font-weight: 900;
+    color: #feca57;
+    text-shadow: 0 0 40px rgba(254, 202, 87, 0.6), 0 2px 10px rgba(0,0,0,0.5);
+    letter-spacing: 4px;
+}
+
+.lb-clear {
+    font-size: 28px;
+    font-weight: 800;
+    color: #2ecc71;
+    text-shadow: 0 0 30px rgba(46, 204, 113, 0.5);
+    margin-top: 4px;
+    letter-spacing: 6px;
+}
+
+@keyframes bannerIn {
+    from { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+    to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+@keyframes bannerOut {
+    from { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    to { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+}
+
+/* === GAMEOVER STATS ROW === */
+.go-stats-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.go-streak {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px 12px;
+    background: rgba(72, 219, 251, 0.1);
+    border: 1px solid rgba(72, 219, 251, 0.2);
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.go-streak.hidden {
+    display: none;
+}
+
+.streak-label {
+    color: var(--text-sec);
+    text-transform: uppercase;
+    font-size: 10px;
+}
+
+.streak-value {
+    font-weight: 700;
+    font-size: 16px;
+    color: #48dbfb;
+}
+
+/* === QUICK RETRY HINT === */
+.retry-hint {
+    font-size: 11px;
+    opacity: 0.5;
+    font-weight: 400;
+    margin-left: 4px;
+}
+
+/* === RETRY BUTTON PULSE === */
+.btn-retry {
+    animation: retryPulse 2s ease-in-out infinite;
+}
+
+@keyframes retryPulse {
+    0%, 100% { box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3); }
+    50% { box-shadow: 0 4px 25px rgba(231, 76, 60, 0.5); }
 }
 
 /* Accessibility: reduce motion for users who prefer it */

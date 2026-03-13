@@ -27,7 +27,10 @@
     "tapToStart": "Tap to start!",
     "back": "DopaBrain Home",
     "gameOver": "Game Over",
-    "combo": "COMBO"
+    "combo": "COMBO",
+    "streak": "STREAK",
+    "multiplier": "MULT",
+    "stageClear": "CLEAR!"
   },
   "pause": {
     "title": "Paused",
@@ -42,6 +45,8 @@
     "newRecord": "🎉 New Record!",
     "revive": "Watch Ad to Revive",
     "retry": "Play Again",
+    "retryHint": "(Enter)",
+    "bestStreak": "Best Streak",
     "share": "📤 Share",
     "menu": "🏠 Menu"
   },
@@ -53,7 +58,10 @@
     "slowBall": "Slow Ball",
     "multiBall": "Multi Ball",
     "laser": "Laser",
-    "extraLife": "Extra Life"
+    "extraLife": "Extra Life",
+    "fireball": "Fireball",
+    "shield": "Shield",
+    "magnet": "Magnet"
   },
   "brickTypes": {
     "normal": "Normal",

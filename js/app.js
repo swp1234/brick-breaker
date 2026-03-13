@@ -74,20 +74,38 @@ const ASSETS = {
 })();
 
 // Confetti celebration effect
-function spawnConfetti() {
-    const colors = ['#ff6b6b','#feca57','#48dbfb','#ff9ff3','#54a0ff','#5f27cd'];
-    for (let i = 0; i < 50; i++) {
+function spawnConfetti(count = 50) {
+    const colors = ['#ff6b6b','#feca57','#48dbfb','#ff9ff3','#54a0ff','#5f27cd','#2ecc71','#e74c3c'];
+    for (let i = 0; i < count; i++) {
         const c = document.createElement('div');
-        c.style.cssText = `position:fixed;top:-10px;left:${Math.random()*100}%;width:${6+Math.random()*6}px;height:${6+Math.random()*6}px;background:${colors[Math.floor(Math.random()*colors.length)]};border-radius:${Math.random()>0.5?'50%':'0'};z-index:99999;pointer-events:none;animation:confettiFall ${1.5+Math.random()*2}s linear forwards`;
+        const size = 6 + Math.random() * 8;
+        const shapes = ['50%', '0', '50% 0 50% 50%'];
+        c.style.cssText = `position:fixed;top:-10px;left:${Math.random()*100}%;width:${size}px;height:${size}px;background:${colors[Math.floor(Math.random()*colors.length)]};border-radius:${shapes[Math.floor(Math.random()*shapes.length)]};z-index:99999;pointer-events:none;animation:confettiFall ${1.5+Math.random()*2.5}s cubic-bezier(0.25,0.46,0.45,0.94) forwards;opacity:0.9`;
         document.body.appendChild(c);
-        setTimeout(() => c.remove(), 4000);
+        setTimeout(() => c.remove(), 5000);
     }
     if (!document.getElementById('confetti-style')) {
         const s = document.createElement('style');
         s.id = 'confetti-style';
-        s.textContent = '@keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}';
+        s.textContent = '@keyframes confettiFall{0%{transform:translateY(0) rotate(0deg) scale(1);opacity:1}50%{opacity:0.9}100%{transform:translateY(100vh) rotate(1080deg) scale(0.3);opacity:0}}';
         document.head.appendChild(s);
     }
+}
+
+// Level complete celebration with banner
+function showLevelBanner(stage) {
+    let banner = document.getElementById('level-banner');
+    if (!banner) {
+        banner = document.createElement('div');
+        banner.id = 'level-banner';
+        document.body.appendChild(banner);
+    }
+    const stageLabel = window.i18n?.t('hud.stage') || 'STAGE';
+    const clearLabel = window.i18n?.t('game.stageClear') || 'CLEAR!';
+    banner.innerHTML = `<div class="lb-stage">${stageLabel} ${stage}</div><div class="lb-clear">${clearLabel}</div>`;
+    banner.className = 'level-banner-show';
+    setTimeout(() => { banner.className = 'level-banner-hide'; }, 2200);
+    setTimeout(() => { banner.className = ''; banner.innerHTML = ''; }, 2800);
 }
 
 class BrickBreakerGame {
@@ -127,6 +145,17 @@ class BrickBreakerGame {
         this.floatingTexts = [];
         this.shakeAmount = 0;
         this.shakeFrames = 0;
+
+        // Streak system (bricks broken without paddle touch)
+        this.streak = 0;
+        this.bestStreak = 0;
+        this.streakFlash = 0;
+
+        // Active power-up tracking for HUD indicators
+        this.activePowerups = [];
+
+        // Level celebration state
+        this.levelCelebrating = false;
 
         this.stats = {
             totalScore: 0,
@@ -193,7 +222,11 @@ class BrickBreakerGame {
 
         // Keyboard controls
         document.addEventListener('keydown', (e) => {
-            if (e.key === ' ') this.togglePause();
+            if (e.key === ' ') {
+                if (this.state === GAME_STATES.GAME) this.togglePause();
+                else if (this.state === GAME_STATES.GAMEOVER) this.startGame();
+            }
+            if (e.key === 'Enter' && this.state === GAME_STATES.GAMEOVER) this.startGame();
             if (e.key === 'ArrowLeft') this.paddle.speed = -this.paddle.maxSpeed;
             if (e.key === 'ArrowRight') this.paddle.speed = this.paddle.maxSpeed;
         });
@@ -226,6 +259,11 @@ class BrickBreakerGame {
         this.combo = 0;
         this.maxCombo = 0;
         this.floatingTexts = [];
+        this.streak = 0;
+        this.bestStreak = 0;
+        this.streakFlash = 0;
+        this.activePowerups = [];
+        this.levelCelebrating = false;
 
         if (resumeState) {
             this.score = resumeState.score;
@@ -445,8 +483,7 @@ class BrickBreakerGame {
         }
 
         // Check stage complete
-        if (this.bricks.every(b => !b.active)) {
-            spawnConfetti();
+        if (!this.levelCelebrating && this.bricks.every(b => !b.active)) {
             this.nextStage();
         }
 
@@ -489,6 +526,14 @@ class BrickBreakerGame {
                 this.addFloatingText(`${this.combo}x COMBO!`, ball.x, this.paddle.y - 30, '#f39c12');
             }
             this.combo = 0;
+
+            // End streak on paddle touch
+            if (this.streak >= 3) {
+                const streakLabel = window.i18n?.t('game.streak') || 'STREAK';
+                this.addFloatingText(`${this.streak} ${streakLabel}!`, ball.x, this.paddle.y - 50, '#48dbfb');
+            }
+            if (this.streak > this.bestStreak) this.bestStreak = this.streak;
+            this.streak = 0;
         }
     }
 
@@ -525,9 +570,13 @@ class BrickBreakerGame {
                 if (brick.health <= 0) {
                     brick.active = false;
                     this.combo++;
+                    this.streak++;
+                    this.streakFlash = 30;
                     if (this.combo > this.maxCombo) this.maxCombo = this.combo;
+                    if (this.streak > this.bestStreak) this.bestStreak = this.streak;
                     const comboMultiplier = Math.min(this.combo, 10);
-                    const points = 10 * originalHealth * comboMultiplier;
+                    const streakBonus = this.streak >= 5 ? Math.floor(this.streak / 5) : 0;
+                    const points = 10 * originalHealth * (comboMultiplier + streakBonus);
                     this.score += points;
                     this.stats.bricksDestroyed++;
 
@@ -632,14 +681,49 @@ class BrickBreakerGame {
     }
 
     activatePowerup(type) {
+        const powerupNames = {
+            [POWERUP_TYPES.PADDLE_EXPAND]: window.i18n?.t('powerups.paddleExpand') || 'Paddle+',
+            [POWERUP_TYPES.SLOW_BALL]: window.i18n?.t('powerups.slowBall') || 'Slow',
+            [POWERUP_TYPES.MULTI_BALL]: window.i18n?.t('powerups.multiBall') || 'Multi',
+            [POWERUP_TYPES.LASER]: window.i18n?.t('powerups.laser') || 'Laser',
+            [POWERUP_TYPES.EXTRA_LIFE]: window.i18n?.t('powerups.extraLife') || '+Life',
+            [POWERUP_TYPES.FIREBALL]: window.i18n?.t('powerups.fireball') || 'Fire',
+            [POWERUP_TYPES.SHIELD]: window.i18n?.t('powerups.shield') || 'Shield',
+            [POWERUP_TYPES.MAGNET]: window.i18n?.t('powerups.magnet') || 'Magnet'
+        };
+        const powerupIcons = {
+            [POWERUP_TYPES.PADDLE_EXPAND]: '\u2194',
+            [POWERUP_TYPES.SLOW_BALL]: '\u23F3',
+            [POWERUP_TYPES.MULTI_BALL]: '\u2726',
+            [POWERUP_TYPES.LASER]: '\u26A1',
+            [POWERUP_TYPES.EXTRA_LIFE]: '\u2764',
+            [POWERUP_TYPES.FIREBALL]: '\u{1F525}',
+            [POWERUP_TYPES.SHIELD]: '\u{1F6E1}',
+            [POWERUP_TYPES.MAGNET]: '\u{1F9F2}'
+        };
+        const powerupColors = {
+            [POWERUP_TYPES.PADDLE_EXPAND]: '#3498db',
+            [POWERUP_TYPES.SLOW_BALL]: '#9b59b6',
+            [POWERUP_TYPES.MULTI_BALL]: '#e91e63',
+            [POWERUP_TYPES.LASER]: '#2ecc71',
+            [POWERUP_TYPES.EXTRA_LIFE]: '#e74c3c',
+            [POWERUP_TYPES.FIREBALL]: '#ff6b00',
+            [POWERUP_TYPES.SHIELD]: '#00c8ff',
+            [POWERUP_TYPES.MAGNET]: '#f1c40f'
+        };
+
+        let duration = 0;
+
         switch(type) {
             case POWERUP_TYPES.PADDLE_EXPAND:
                 this.paddle.width = Math.min(this.paddle.width + 20, 150);
-                setTimeout(() => this.paddle.width = GAME_CONFIG.PADDLE_WIDTH, 10000);
+                duration = 10000;
+                setTimeout(() => this.paddle.width = GAME_CONFIG.PADDLE_WIDTH, duration);
                 break;
             case POWERUP_TYPES.SLOW_BALL:
                 this.balls.forEach(b => b.speed *= 0.8);
-                setTimeout(() => this.balls.forEach(b => b.speed /= 0.8), 8000);
+                duration = 8000;
+                setTimeout(() => this.balls.forEach(b => b.speed /= 0.8), duration);
                 break;
             case POWERUP_TYPES.MULTI_BALL:
                 if (this.balls.length < 5) {
@@ -650,32 +734,78 @@ class BrickBreakerGame {
                 break;
             case POWERUP_TYPES.LASER:
                 this.laser = { active: true, time: 300 };
+                duration = 5000;
                 break;
             case POWERUP_TYPES.EXTRA_LIFE:
                 this.lives = Math.min(this.lives + 1, 5);
                 break;
             case POWERUP_TYPES.FIREBALL:
                 this.fireball = { active: true, time: 300 };
+                duration = 5000;
                 break;
             case POWERUP_TYPES.SHIELD:
                 this.shield = { active: true, hits: 3 };
+                duration = -1; // hit-based, not time-based
                 break;
             case POWERUP_TYPES.MAGNET:
                 this.magnet = { active: true, time: 400 };
+                duration = 6700;
                 break;
         }
+
+        // Track active powerup for HUD indicator
+        if (duration !== 0) {
+            const entry = {
+                type,
+                name: powerupNames[type] || type,
+                icon: powerupIcons[type] || '?',
+                color: powerupColors[type] || '#fff',
+                startTime: Date.now(),
+                duration: duration > 0 ? duration : Infinity
+            };
+            // Remove existing of same type
+            this.activePowerups = this.activePowerups.filter(p => p.type !== type);
+            this.activePowerups.push(entry);
+            if (duration > 0) {
+                setTimeout(() => {
+                    this.activePowerups = this.activePowerups.filter(p => p.type !== type);
+                }, duration);
+            }
+        }
+
+        // Flash powerup name
+        this.addFloatingText(`${powerupIcons[type] || ''} ${powerupNames[type] || type}`, GAME_CONFIG.CANVAS_WIDTH / 2, GAME_CONFIG.CANVAS_HEIGHT / 2 - 40, powerupColors[type] || '#fff');
+
         this.score += 50;
     }
 
     nextStage() {
         if (this.currentStage < GAME_CONFIG.MAX_STAGES) {
+            const clearedStage = this.currentStage;
             this.currentStage++;
             if (window.sfx) window.sfx.playSuccessSound();
-            this.generateBricks();
-            this.balls.forEach(b => b.onPaddle = true);
-            this.gameRunning = false;
-            this.saveGameState();
-            this.showTapHint();
+
+            // Enhanced level celebration
+            this.levelCelebrating = true;
+            spawnConfetti(80);
+            showLevelBanner(clearedStage);
+            if (typeof Haptic !== 'undefined') Haptic.heavy();
+
+            // Stage clear bonus
+            const stageBonus = clearedStage * 100;
+            this.score += stageBonus;
+            this.addFloatingText(`+${stageBonus} BONUS!`, GAME_CONFIG.CANVAS_WIDTH / 2, GAME_CONFIG.CANVAS_HEIGHT / 2 - 60, '#2ecc71');
+
+            setTimeout(() => {
+                this.levelCelebrating = false;
+                this.generateBricks();
+                this.balls.forEach(b => b.onPaddle = true);
+                this.gameRunning = false;
+                this.activePowerups = [];
+                this.streak = 0;
+                this.saveGameState();
+                this.showTapHint();
+            }, 2000);
         } else {
             this.clearGameState();
             this.endGame();
@@ -729,6 +859,17 @@ class BrickBreakerGame {
         document.getElementById('go-score').textContent = this.score;
         document.getElementById('go-best').textContent = this.highScore;
         document.getElementById('go-stage').querySelector('.stage-value').textContent = this.currentStage;
+
+        // Show best streak in gameover
+        const streakEl = document.getElementById('go-streak');
+        if (streakEl) {
+            streakEl.querySelector('.streak-value').textContent = this.bestStreak;
+            if (this.bestStreak >= 3) {
+                streakEl.classList.remove('hidden');
+            } else {
+                streakEl.classList.add('hidden');
+            }
+        }
 
         // Display leaderboard
         this.displayLeaderboard(leaderboardResult);
@@ -921,6 +1062,92 @@ class BrickBreakerGame {
             this.ctx.globalAlpha = 0.8;
             this.ctx.fillText(`${this.combo}x ${window.i18n?.t('game.combo') || 'COMBO'}`, GAME_CONFIG.CANVAS_WIDTH / 2, GAME_CONFIG.CANVAS_HEIGHT / 2);
             this.ctx.globalAlpha = 1;
+        }
+
+        // Draw streak counter (top-right of canvas)
+        if (this.streak >= 2) {
+            const streakLabel = window.i18n?.t('game.streak') || 'STREAK';
+            const alpha = this.streakFlash > 0 ? 1 : 0.7;
+            this.ctx.globalAlpha = alpha;
+            this.ctx.textAlign = 'right';
+
+            // Streak background pill
+            const streakText = `${this.streak} ${streakLabel}`;
+            this.ctx.font = 'bold 13px -apple-system, sans-serif';
+            const tw = this.ctx.measureText(streakText).width;
+            const px = GAME_CONFIG.CANVAS_WIDTH - 10;
+            const py = 18;
+            this.ctx.fillStyle = 'rgba(72, 219, 251, 0.15)';
+            this.ctx.beginPath();
+            this.ctx.roundRect(px - tw - 14, py - 12, tw + 20, 22, 11);
+            this.ctx.fill();
+
+            // Streak text
+            this.ctx.fillStyle = this.streak >= 10 ? '#feca57' : '#48dbfb';
+            this.ctx.fillText(streakText, px, py + 2);
+            this.ctx.globalAlpha = 1;
+        }
+        if (this.streakFlash > 0) this.streakFlash--;
+
+        // Draw multiplier display (left side under bricks)
+        const currentMultiplier = Math.min(this.combo, 10) + (this.streak >= 5 ? Math.floor(this.streak / 5) : 0);
+        if (currentMultiplier >= 2) {
+            const multLabel = window.i18n?.t('game.multiplier') || 'MULTIPLIER';
+            this.ctx.textAlign = 'left';
+            this.ctx.font = 'bold 12px -apple-system, sans-serif';
+            const my = GAME_CONFIG.CANVAS_HEIGHT - 50;
+            // Background pill
+            this.ctx.fillStyle = 'rgba(243, 156, 18, 0.15)';
+            this.ctx.beginPath();
+            this.ctx.roundRect(6, my - 10, 90, 22, 11);
+            this.ctx.fill();
+            // Text
+            this.ctx.fillStyle = currentMultiplier >= 5 ? '#feca57' : '#f39c12';
+            this.ctx.fillText(`x${currentMultiplier} ${multLabel}`, 14, my + 4);
+        }
+
+        // Draw active power-up indicators (bottom-right HUD)
+        if (this.activePowerups.length > 0) {
+            const now = Date.now();
+            let iy = GAME_CONFIG.CANVAS_HEIGHT - 60;
+            this.ctx.textAlign = 'right';
+
+            // Remove expired shield if inactive
+            this.activePowerups = this.activePowerups.filter(p => {
+                if (p.type === POWERUP_TYPES.SHIELD && this.shield && !this.shield.active) return false;
+                return true;
+            });
+
+            for (const pu of this.activePowerups) {
+                const elapsed = now - pu.startTime;
+                const remaining = pu.duration === Infinity ? 1 : Math.max(0, 1 - elapsed / pu.duration);
+
+                // Background pill
+                this.ctx.fillStyle = `rgba(0,0,0,0.4)`;
+                this.ctx.beginPath();
+                this.ctx.roundRect(GAME_CONFIG.CANVAS_WIDTH - 100, iy - 10, 94, 20, 10);
+                this.ctx.fill();
+
+                // Timer bar
+                if (pu.duration !== Infinity) {
+                    this.ctx.fillStyle = pu.color;
+                    this.ctx.globalAlpha = 0.5;
+                    this.ctx.beginPath();
+                    this.ctx.roundRect(GAME_CONFIG.CANVAS_WIDTH - 100, iy - 10, 94 * remaining, 20, 10);
+                    this.ctx.fill();
+                    this.ctx.globalAlpha = 1;
+                }
+
+                // Icon + name
+                this.ctx.fillStyle = '#fff';
+                this.ctx.font = 'bold 11px -apple-system, sans-serif';
+                const label = pu.type === POWERUP_TYPES.SHIELD && this.shield
+                    ? `${pu.icon} ${this.shield.hits}`
+                    : `${pu.icon} ${pu.name}`;
+                this.ctx.fillText(label, GAME_CONFIG.CANVAS_WIDTH - 10, iy + 3);
+
+                iy -= 24;
+            }
         }
 
         this.ctx.restore();
