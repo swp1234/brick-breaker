@@ -83,5 +83,12 @@
     "audio": "音频不可用，可继续使用。",
     "network": "请检查网络连接后重试。",
     "general": "出现问题，请刷新或重试。"
+  },
+  "related": {
+    "title": "更多探索",
+    "puzzle2048": "2048拼图",
+    "blockPuzzle": "方块拼图",
+    "pongGame": "乒乓游戏",
+    "snakeGame": "贪吃蛇"
   }
 }

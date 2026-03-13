@@ -83,5 +83,12 @@
     "audio": "Audio no disponible. Puede continuar.",
     "network": "Verifique su conexión e inténtelo de nuevo.",
     "general": "Algo salió mal. Actualice o inténtelo de nuevo."
+  },
+  "related": {
+    "title": "Más por explorar",
+    "puzzle2048": "Puzzle 2048",
+    "blockPuzzle": "Puzzle de bloques",
+    "pongGame": "Juego Pong",
+    "snakeGame": "Juego de la serpiente"
   }
 }

@@ -83,5 +83,12 @@
     "audio": "Áudio indisponível. Você pode continuar.",
     "network": "Verifique sua conexão e tente novamente.",
     "general": "Algo deu errado. Atualize ou tente novamente."
+  },
+  "related": {
+    "title": "Mais para explorar",
+    "puzzle2048": "Puzzle 2048",
+    "blockPuzzle": "Puzzle de blocos",
+    "pongGame": "Jogo Pong",
+    "snakeGame": "Jogo da cobra"
   }
 }

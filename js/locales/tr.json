@@ -83,5 +83,12 @@
     "audio": "Ses kullanılamıyor. Devam edebilirsiniz.",
     "network": "Bağlantınızı kontrol edip tekrar deneyin.",
     "general": "Bir şeyler ters gitti. Yenileyip tekrar deneyin."
+  },
+  "related": {
+    "title": "Daha fazla keşfet",
+    "puzzle2048": "2048 Bulmaca",
+    "blockPuzzle": "Blok Bulmaca",
+    "pongGame": "Pong Oyunu",
+    "snakeGame": "Yılan Oyunu"
   }
 }

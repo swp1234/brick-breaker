@@ -83,5 +83,12 @@
     "audio": "Audio tidak tersedia. Anda dapat melanjutkan.",
     "network": "Periksa koneksi Anda dan coba lagi.",
     "general": "Terjadi kesalahan. Muat ulang atau coba lagi."
+  },
+  "related": {
+    "title": "Jelajahi lebih lanjut",
+    "puzzle2048": "Puzzle 2048",
+    "blockPuzzle": "Puzzle Blok",
+    "pongGame": "Pong Game",
+    "snakeGame": "Permainan Ular"
   }
 }

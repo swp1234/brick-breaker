@@ -83,5 +83,12 @@
     "audio": "Audio unavailable. You can still continue.",
     "network": "Please check your connection and try again.",
     "general": "Something went wrong. Please refresh or try again."
+  },
+  "related": {
+    "title": "More to Explore",
+    "puzzle2048": "2048 Puzzle",
+    "blockPuzzle": "Block Puzzle",
+    "pongGame": "Pong Game",
+    "snakeGame": "Snake Game"
   }
 }
