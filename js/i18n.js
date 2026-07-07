@@ -8,15 +8,27 @@ class I18n {
         this.translations = {};
         this.supportedLanguages = ['ko', 'en', 'zh', 'hi', 'ru', 'ja', 'es', 'pt', 'id', 'tr', 'de', 'fr'];
         this.currentLang = this.detectLanguage();
+        document.documentElement.lang = this.currentLang;
         this.init();
     }
 
     detectLanguage() {
+        // URL language is an explicit user/navigation choice.
+        try {
+            const params = new URLSearchParams(window.location.search);
+            const urlLang = params.get('lang');
+            if (urlLang && this.supportedLanguages.includes(urlLang)) {
+                return urlLang;
+            }
+        } catch (e) {}
+
         // Check localStorage
-        const saved = localStorage.getItem('i18n_lang');
-        if (saved && this.supportedLanguages.includes(saved)) {
-            return saved;
-        }
+        try {
+            const saved = localStorage.getItem('i18n_lang');
+            if (saved && this.supportedLanguages.includes(saved)) {
+                return saved;
+            }
+        } catch (e) {}
 
         // Check browser language
         const browserLang = (navigator.language || navigator.userLanguage).split('-')[0];
@@ -70,11 +82,16 @@ class I18n {
 
         await this.loadTranslations(lang);
         this.currentLang = lang;
-        localStorage.setItem('i18n_lang', lang);
+        document.documentElement.lang = lang;
+        try {
+            localStorage.setItem('i18n_lang', lang);
+        } catch (e) {}
         this.updateUI();
     }
 
     updateUI() {
+        document.documentElement.lang = this.currentLang;
+
         // Update data-i18n attributes
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
