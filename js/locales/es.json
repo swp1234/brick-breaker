@@ -2,13 +2,6 @@
   "app": {
     "loading": "Cargando..."
   },
-  "ad": {
-    "placeholder": "Área de anuncios",
-    "placeholder_interstitial": "Área de anuncios (pantalla completa)",
-    "label": "Anuncio",
-    "countdown": "Cerrar en",
-    "close": "✕ Cerrar"
-  },
   "menu": {
     "subtitle": "Juego Clásico Brick Breaker",
     "highScore": "Puntuación Máxima",
@@ -43,15 +36,11 @@
     "best": "Mejor",
     "stage": "Nivel",
     "newRecord": "🎉 ¡Nuevo Récord!",
-    "revive": "Ver anuncio para revivir",
     "retry": "Jugar de Nuevo",
     "retryHint": "(Enter)",
     "bestStreak": "Mejor Racha",
     "share": "📤 Compartir",
     "menu": "🏠 Menú"
-  },
-  "recommendations": {
-    "title": "Prueba también estos"
   },
   "powerups": {
     "paddleExpand": "Expansión de Paleta",
@@ -79,11 +68,6 @@
     "confirmReset": "¿Seguro que quieres reiniciar todos los récords?",
     "resetSuccess": "¡Récords reiniciados!"
   },
-  "share": {
-    "twitter": "Twitter",
-    "copyUrl": "📋 Copiar URL",
-    "copied": "✅ ¡Copiado!"
-  },
   "error": {
     "storage": "Algunas funciones pueden estar limitadas en modo privado.",
     "data": "Error al cargar datos. Actualice la página.",
@@ -91,12 +75,5 @@
     "audio": "Audio no disponible. Puede continuar.",
     "network": "Verifique su conexión e inténtelo de nuevo.",
     "general": "Algo salió mal. Actualice o inténtelo de nuevo."
-  },
-  "related": {
-    "title": "Más por explorar",
-    "puzzle2048": "Puzzle 2048",
-    "blockPuzzle": "Puzzle de bloques",
-    "pongGame": "Juego Pong",
-    "snakeGame": "Juego de la serpiente"
   }
 }

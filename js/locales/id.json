@@ -2,13 +2,6 @@
   "app": {
     "loading": "Memuat..."
   },
-  "ad": {
-    "placeholder": "Area Iklan",
-    "placeholder_interstitial": "Area Iklan (Layar Penuh)",
-    "label": "Iklan",
-    "countdown": "Tutup dalam",
-    "close": "✕ Tutup"
-  },
   "menu": {
     "subtitle": "Game Brick Breaker Klasik",
     "highScore": "Skor Tertinggi",
@@ -43,15 +36,11 @@
     "best": "Terbaik",
     "stage": "Tingkat",
     "newRecord": "🎉 Rekor Baru!",
-    "revive": "Tonton iklan untuk menghidupkan kembali",
     "retry": "Mainkan Lagi",
     "retryHint": "(Enter)",
     "bestStreak": "Beruntun Terbaik",
     "share": "📤 Bagikan",
     "menu": "🏠 Menu"
-  },
-  "recommendations": {
-    "title": "Coba Ini Juga"
   },
   "powerups": {
     "paddleExpand": "Perluasan Dayung",
@@ -79,11 +68,6 @@
     "confirmReset": "Yakin ingin mereset semua rekor?",
     "resetSuccess": "Rekor direset!"
   },
-  "share": {
-    "twitter": "Twitter",
-    "copyUrl": "📋 Salin URL",
-    "copied": "✅ Disalin!"
-  },
   "error": {
     "storage": "Beberapa fitur mungkin terbatas dalam mode privat.",
     "data": "Kesalahan memuat data. Silakan muat ulang.",
@@ -91,12 +75,5 @@
     "audio": "Audio tidak tersedia. Anda dapat melanjutkan.",
     "network": "Periksa koneksi Anda dan coba lagi.",
     "general": "Terjadi kesalahan. Muat ulang atau coba lagi."
-  },
-  "related": {
-    "title": "Jelajahi lebih lanjut",
-    "puzzle2048": "Puzzle 2048",
-    "blockPuzzle": "Puzzle Blok",
-    "pongGame": "Pong Game",
-    "snakeGame": "Permainan Ular"
   }
 }

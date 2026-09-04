@@ -2,13 +2,6 @@
   "app": {
     "loading": "Yükleniyor..."
   },
-  "ad": {
-    "placeholder": "Reklam Alanı",
-    "placeholder_interstitial": "Reklam Alanı (Tam Ekran)",
-    "label": "Reklam",
-    "countdown": "Kapat",
-    "close": "✕ Kapat"
-  },
   "menu": {
     "subtitle": "Klasik Brick Breaker Oyunu",
     "highScore": "En Yüksek Puan",
@@ -43,15 +36,11 @@
     "best": "En İyi",
     "stage": "Seviye",
     "newRecord": "🎉 Yeni Rekor!",
-    "revive": "İhya etmek için reklam izleyin",
     "retry": "Tekrar Oyna",
     "retryHint": "(Enter)",
     "bestStreak": "En İyi Seri",
     "share": "📤 Paylaş",
     "menu": "🏠 Menü"
-  },
-  "recommendations": {
-    "title": "Bunları da Deneyin"
   },
   "powerups": {
     "paddleExpand": "Raket Genişletme",
@@ -79,11 +68,6 @@
     "confirmReset": "Tüm kayıtları sıfırlamak istediğinize emin misiniz?",
     "resetSuccess": "Kayıtlar sıfırlandı!"
   },
-  "share": {
-    "twitter": "Twitter",
-    "copyUrl": "📋 URL Kopyala",
-    "copied": "✅ Kopyalandı!"
-  },
   "error": {
     "storage": "Gizli modda bazı özellikler sınırlı olabilir.",
     "data": "Veri yükleme hatası. Lütfen sayfayı yenileyin.",
@@ -91,12 +75,5 @@
     "audio": "Ses kullanılamıyor. Devam edebilirsiniz.",
     "network": "Bağlantınızı kontrol edip tekrar deneyin.",
     "general": "Bir şeyler ters gitti. Yenileyip tekrar deneyin."
-  },
-  "related": {
-    "title": "Daha fazla keşfet",
-    "puzzle2048": "2048 Bulmaca",
-    "blockPuzzle": "Blok Bulmaca",
-    "pongGame": "Pong Oyunu",
-    "snakeGame": "Yılan Oyunu"
   }
 }

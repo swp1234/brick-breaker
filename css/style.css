@@ -173,21 +173,6 @@ body {
     z-index: 10;
 }
 
-.ad-banner {
-    min-height: 60px;
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    color: var(--text-dim);
-}
-
-.ad-top {
-    margin-bottom: auto;
-}
-
 .menu-content {
     flex: 1;
     display: flex;
@@ -267,7 +252,7 @@ body {
     max-width: 280px;
 }
 
-.btn-primary, .btn-secondary, .btn-revive {
+.btn-primary, .btn-secondary {
     padding: 14px 20px;
     border: none;
     border-radius: var(--radius);
@@ -609,21 +594,6 @@ body {
     max-width: 280px;
 }
 
-.btn-revive {
-    background: linear-gradient(135deg, var(--success), #27ae60);
-    color: white;
-    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
-}
-
-.btn-revive:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
-}
-
-.revive-icon {
-    font-size: 16px;
-}
-
 .go-sub-buttons {
     display: flex;
     gap: 10px;
@@ -641,7 +611,7 @@ body {
     cursor: pointer;
     transition: var(--transition);
     font-size: 13px;
-    min-height: 40px;
+    min-height: 44px;
 }
 
 .btn-share:hover, .btn-menu:hover {
@@ -713,135 +683,6 @@ body {
 .stat-value {
     font-weight: 700;
     color: var(--primary);
-}
-
-/* === INTERSTITIAL AD === */
-.interstitial-overlay {
-    z-index: 150;
-}
-
-.interstitial-card {
-    background: var(--bg-light);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 24px;
-    max-width: 340px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.interstitial-label {
-    font-size: 12px;
-    color: var(--text-sec);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 0;
-}
-
-.interstitial-placeholder {
-    min-height: 200px;
-    background: rgba(231, 76, 60, 0.05);
-    border: 1px dashed var(--border);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-dim);
-    font-size: 13px;
-    text-align: center;
-    padding: 20px;
-}
-
-.interstitial-timer {
-    text-align: center;
-    font-size: 13px;
-    color: var(--text-sec);
-}
-
-#ad-countdown {
-    font-weight: 700;
-    color: var(--primary);
-    font-size: 16px;
-}
-
-.btn-close-ad {
-    padding: 10px 16px;
-    background: var(--primary);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.btn-close-ad:hover {
-    background: var(--secondary);
-}
-
-.btn-close-ad.hidden {
-    display: none;
-}
-
-/* === RECOMMENDATIONS === */
-.recommendations-section {
-    padding: 30px 20px;
-    background: var(--bg);
-    border-top: 1px solid var(--border);
-}
-
-.rec-title {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 16px;
-    color: var(--text);
-}
-
-.rec-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    gap: 12px;
-}
-
-.rec-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    padding: 12px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    text-decoration: none;
-    color: var(--text);
-    transition: var(--transition);
-    cursor: pointer;
-}
-
-.rec-card:hover {
-    background: var(--surface-hover);
-    border-color: var(--border-hover);
-    transform: translateY(-2px);
-}
-
-.rec-icon {
-    font-size: 32px;
-}
-
-.rec-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    flex: 1;
-}
-
-.rec-name {
-    font-size: 12px;
-    font-weight: 600;
-    text-align: center;
 }
 
 /* === FOOTER === */
@@ -1063,11 +904,6 @@ body {
     background: var(--bg);
 }
 
-[data-theme="light"] .ad-banner {
-    background: var(--surface);
-    border-color: var(--border);
-}
-
 [data-theme="light"] .high-score-display {
     background: rgba(231, 76, 60, 0.05);
     border-color: rgba(231, 76, 60, 0.15);
@@ -1144,26 +980,6 @@ body {
 [data-theme="light"] .stat-item {
     background: var(--surface);
     border-color: var(--border);
-}
-
-[data-theme="light"] .interstitial-card {
-    background: var(--bg-light);
-    border-color: var(--border);
-}
-
-[data-theme="light"] .recommendations-section {
-    background: var(--bg);
-    border-top-color: var(--border);
-}
-
-[data-theme="light"] .rec-card {
-    background: var(--surface);
-    border-color: var(--border);
-}
-
-[data-theme="light"] .rec-card:hover {
-    background: var(--surface-hover);
-    border-color: var(--border-hover);
 }
 
 [data-theme="light"] .game-footer {

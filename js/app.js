@@ -27,6 +27,18 @@ const GAME_STATES = {
     STATS: 'stats'
 };
 
+const brickBreakerStages = new Set();
+
+function trackBrickBreakerStage(name) {
+    if (brickBreakerStages.has(name) || typeof window.gtag !== 'function') return;
+    brickBreakerStages.add(name);
+    window.gtag('event', name, {
+        app_name: 'brick-breaker',
+        event_category: 'game_stage',
+        transport_type: 'beacon'
+    });
+}
+
 const BRICK_TYPES = {
     NORMAL: { health: 1, color: '#e74c3c' },
     STRONG: { health: 2, color: '#c0392b' },
@@ -173,6 +185,7 @@ class BrickBreakerGame {
         this.loadStats();
         this.showMenu();
         this.startGameLoop();
+        trackBrickBreakerStage('brick_breaker_view');
     }
 
     setupCanvas() {
@@ -207,7 +220,6 @@ class BrickBreakerGame {
         // Gameover buttons
         document.getElementById('btn-retry').addEventListener('click', () => this.startGame());
         document.getElementById('btn-menu').addEventListener('click', () => this.showMenu());
-        document.getElementById('btn-revive').addEventListener('click', () => this.reviveWithAd());
         document.getElementById('btn-share').addEventListener('click', () => this.shareScore());
 
         // Paddle control
@@ -217,6 +229,7 @@ class BrickBreakerGame {
             if (!this.gameRunning && this.state === GAME_STATES.GAME) {
                 this.gameRunning = true;
                 this.hideTapHint();
+                trackBrickBreakerStage('brick_breaker_progress');
             }
         });
 
@@ -247,6 +260,7 @@ class BrickBreakerGame {
     }
 
     startGame(resumeState) {
+        trackBrickBreakerStage('brick_breaker_start');
         this.state = GAME_STATES.GAME;
         this.gameRunning = false;
         this.gamePaused = false;
@@ -833,6 +847,7 @@ class BrickBreakerGame {
         this.gameRunning = false;
         this.state = GAME_STATES.GAMEOVER;
         this.clearGameState();
+        trackBrickBreakerStage('brick_breaker_complete');
 
         // Add score to leaderboard
         const leaderboardResult = this.leaderboard.addScore(this.score, {
@@ -874,58 +889,27 @@ class BrickBreakerGame {
         // Display leaderboard
         this.displayLeaderboard(leaderboardResult);
 
-        if (typeof DailyStreak !== 'undefined') DailyStreak.report(this.score);
-        if (typeof GameAchievements !== 'undefined') GameAchievements.report({
-            bestScore: this.highScore,
-            totalGames: this.stats.gamesPlayed,
-            bestStage: this.stats.maxStage
-        });
-
-        const showResult = () => {
-            this.showGameoverScreen();
-            if (window.sfx) window.sfx.playGameOverSound();
-            if (typeof Haptic !== 'undefined') Haptic.heavy();
-        };
-
-        if (typeof GameAds !== 'undefined') {
-            GameAds.showInterstitial({ onComplete: () => showResult() });
-        } else {
-            showResult();
-        }
+        this.showGameoverScreen();
+        if (window.sfx) window.sfx.playGameOverSound();
+        if (typeof Haptic !== 'undefined') Haptic.heavy();
     }
 
-    reviveWithAd() {
-        const doRevive = () => {
-            this.lives++;
-            this.initializeBalls();
-            this.gameRunning = false;
-            this.showGameScreen();
-        };
+    async shareScore() {
+        const text = 'I played Brick Breaker on DopaBrain.';
+        const url = 'https://dopabrain.com/brick-breaker/';
 
-        if (typeof GameAds !== 'undefined') {
-            GameAds.showRewarded({
-                onReward: () => doRevive(),
-                onSkip: () => {}
-            });
-        } else {
-            doRevive(); // fallback
-        }
-    }
-
-    shareScore() {
-        const shareTemplate = window.i18n?.t('share_msg.text') || '🧱 Brick Breaker: {score} pts! Stage: {stage}\n\nTry it: https://dopabrain.com/brick-breaker/';
-        const text = shareTemplate.replace('{score}', this.score).replace('{stage}', this.currentStage);
-
-        if (navigator.share) {
-            navigator.share({
-                title: 'Brick Breaker',
-                text: text,
-                url: 'https://dopabrain.com/brick-breaker/'
-            }).catch(() => {});
-        } else {
-            // Fallback
-            alert(text);
-        }
+        try {
+            if (navigator.share) {
+                await navigator.share({
+                    title: 'Brick Breaker',
+                    text,
+                    url
+                });
+            } else {
+                await navigator.clipboard.writeText(`${text} ${url}`);
+            }
+            trackBrickBreakerStage('brick_breaker_share');
+        } catch (_) {}
     }
 
     createParticles(x, y, color) {
@@ -1514,32 +1498,6 @@ class BrickBreakerGame {
         document.getElementById('tap-hint').classList.add('hidden');
     }
 
-    showInterstitialAd(callback) {
-        const overlay = document.getElementById('interstitial-overlay');
-        const closeBtn = document.getElementById('btn-close-ad');
-        let countdown = 5;
-
-        overlay.classList.remove('hidden');
-        closeBtn.classList.add('hidden');
-        document.getElementById('ad-countdown').textContent = countdown;
-
-        const interval = setInterval(() => {
-            countdown--;
-            document.getElementById('ad-countdown').textContent = countdown;
-
-            if (countdown <= 0) {
-                clearInterval(interval);
-                closeBtn.classList.remove('hidden');
-            }
-        }, 1000);
-
-        closeBtn.onclick = () => {
-            clearInterval(interval);
-            overlay.classList.add('hidden');
-            callback();
-        };
-    }
-
     // --- Session persistence (between-level save/resume) ---
 
     saveGameState() {
@@ -1694,17 +1652,4 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Start game
     window.game = new BrickBreakerGame();
-    if (typeof GameAds !== 'undefined') GameAds.init();
-    if (typeof DailyStreak !== 'undefined') DailyStreak.init({ gameId: 'brick-breaker', bestScoreKey: 'bb_highscore', minTarget: 50 });
-    if (typeof GameAchievements !== 'undefined') GameAchievements.init({
-        gameId: 'brick-breaker',
-        defs: [
-            { id: 'score_1000', stat: 'bestScore', target: 1000, icon: '⭐', name: 'Brick Smasher' },
-            { id: 'score_5000', stat: 'bestScore', target: 5000, icon: '🏆', name: 'Brick Master' },
-            { id: 'score_10000', stat: 'bestScore', target: 10000, icon: '👑', name: 'Brick Legend' },
-            { id: 'games_10', stat: 'totalGames', target: 10, icon: '🎮', name: 'Regular Player' },
-            { id: 'stage_5', stat: 'bestStage', target: 5, icon: '🔥', name: 'Stage Warrior' },
-            { id: 'stage_10', stat: 'bestStage', target: 10, icon: '💎', name: 'Stage Champion' }
-        ]
-    });
 });

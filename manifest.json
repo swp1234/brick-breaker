@@ -1,11 +1,11 @@
 {
-  "name": "Brick Breaker - 벽돌깨기 게임",
+  "name": "Brick Breaker",
   "short_name": "Brick Breaker",
-  "description": "클래식 벽돌깨기의 현대적 리메이크. 네온 스타일, 10+ 스테이지, 파워업 아이템.",
-  "start_url": "/brick-breaker/",
+  "description": "A neon brick-breaking game with stages and power-ups.",
+  "start_url": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "scope": "/brick-breaker/",
+  "scope": "./",
   "background_color": "#0f0f23",
   "theme_color": "#e74c3c",
   "categories": ["games"],
@@ -36,7 +36,7 @@
       "name": "New Game",
       "short_name": "Play",
       "description": "Start a new game",
-      "url": "/brick-breaker/?action=play",
+      "url": "./?action=play",
       "icons": [
         {
           "src": "icon-192.svg",

@@ -2,21 +2,18 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="max-image-preview:large">
 
     <!-- Resource hints for external domains -->
     <link rel="preconnect" href="https://www.googletagmanager.com">
-    <link rel="preconnect" href="https://pagead2.googlesyndication.com">
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
 
     <title>Brick Breaker - Free Online Breakout Game | DopaBrain</title>
 
     <!-- SEO -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3600813755953882" crossorigin="anonymous"></script>
-    <meta name="description" content="Play Brick Breaker free online! Smash bricks across 10+ stages with power-ups and smooth physics. Classic Breakout reimagined for modern browsers on DopaBrain.">
-    <meta name="dateModified" content="2026-07-07">
+    <meta name="description" content="Play a free browser brick-breaking game with touch or mouse controls, progressive stages, power-ups, and local high scores.">
+    <meta name="dateModified" content="2026-09-05">
     <meta name="keywords" content="벽돌깨기, 브릭 브레이커, 클래식 게임, 캐주얼 게임, 무료 게임, 아케이드 게임, 모바일 게임, breakout">
     <link rel="canonical" href="https://dopabrain.com/brick-breaker/">
 
@@ -82,63 +79,8 @@
             "priceCurrency": "USD",
             "availability": "https://schema.org/InStock"
         },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.6",
-            "ratingCount": "3200",
-            "bestRating": "5",
-            "worstRating": "1"
-        },
         "featureList": "Neon graphics, touch/mouse controls, 10+ stages, power-up items, particle effects, sound effects, high score saving, pause, result sharing",
         "gamePlatform": "Web Browser"
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": "Is Brick Breaker free to play online?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Yes, Brick Breaker is 100% free to play online. No downloads, no sign-ups — just open the page in any modern browser and start smashing bricks."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "How do I control the paddle in Brick Breaker?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Move the paddle using your mouse on desktop or by touching and dragging on mobile devices. The paddle follows your input to bounce the ball and break bricks."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "What power-ups are available in Brick Breaker?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Power-ups drop from broken bricks and include multi-ball, wider paddle, fireball (passes through bricks), and more. Catch them with your paddle to activate."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "How many stages does Brick Breaker have?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Brick Breaker features over 10 unique stages with different brick layouts and increasing difficulty. Each stage introduces new challenges and brick patterns."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Can I play Brick Breaker on mobile?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Yes! Brick Breaker works perfectly on smartphones and tablets. The touch controls are optimized for mobile play with smooth paddle movement."
-                }
-            }
-        ]
     }
     </script>
     <script type="application/ld+json">
@@ -171,12 +113,11 @@
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-J8GSWM40TV"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-J8GSWM40TV');</script>
-<script>setTimeout(function(){if(typeof gtag!=='undefined')gtag('event','page_engage',{event_category:'brick_breaker',engagement_time_msec:5000})},5000);</script>
 
     <!-- Deferred script loading -->
     <script src="js/i18n.js" defer></script>
 </head>
-<body>
+<body data-ad-serving="suspended-invalid-traffic-2026-09-03">
     <a href="#main-content" class="skip-link" data-i18n="accessibility.skipToMain">Skip to main content</a>
     <div class="app-loader" id="app-loader">
         <div class="loader-content">
@@ -204,10 +145,6 @@
     <div class="game-wrapper" id="main-content">
         <!-- === MENU SCREEN === -->
         <div class="screen menu-screen active" id="menu-screen">
-            <div class="ad-banner ad-top">
-                <span class="ad-placeholder" data-i18n="ad.placeholder">광고 영역</span>
-            </div>
-
             <div class="menu-content">
                 <div class="game-logo">
                     <span class="logo-brick">🧱</span>
@@ -300,10 +237,6 @@
                 <div class="go-new-record hidden" id="go-new-record" data-i18n="gameover.newRecord">🎉 새 기록!</div>
 
                 <div class="go-buttons">
-                    <button class="btn-revive" id="btn-revive">
-                        <span class="revive-icon">📺</span>
-                        <span data-i18n="gameover.revive">광고 보고 부활하기</span>
-                    </button>
                     <button class="btn-primary btn-retry" id="btn-retry" autofocus>
                         <span data-i18n="gameover.retry">다시 하기</span>
                         <span class="retry-hint" data-i18n="gameover.retryHint">(Enter)</span>
@@ -312,21 +245,7 @@
                         <button class="btn-share" id="btn-share" data-i18n="gameover.share">📤 공유</button>
                         <button class="btn-menu" id="btn-menu" data-i18n="gameover.menu">🏠 메뉴</button>
                     </div>
-
-                    <!-- Social Share Buttons -->
-                    <div class="share-section" id="share-section">
-                        <button class="share-btn share-twitter" id="shareTwitterBtn" aria-label="Share on Twitter">
-                            <span>𝕏</span> <span data-i18n="share.twitter">Twitter</span>
-                        </button>
-                        <button class="share-btn share-url" id="shareUrlBtn" aria-label="Copy URL">
-                            <span data-i18n="share.copyUrl">📋 Copy URL</span>
-                        </button>
-                    </div>
                 </div>
-            </div>
-
-            <div class="ad-banner ad-bottom-go">
-                <span class="ad-placeholder" data-i18n="ad.placeholder">광고 영역</span>
             </div>
         </div>
 
@@ -339,17 +258,6 @@
             <div class="stats-content" id="stats-content"></div>
         </div>
 
-        <!-- === INTERSTITIAL AD OVERLAY === -->
-        <div class="overlay interstitial-overlay hidden" id="interstitial-overlay">
-            <div class="interstitial-card">
-                <p class="interstitial-label" data-i18n="ad.label">광고</p>
-                <div class="interstitial-placeholder" data-i18n="ad.placeholder_interstitial">광고 영역 (전면)</div>
-                <div class="interstitial-timer">
-                    <span id="ad-countdown">5</span><span data-i18n="ad.countdown">초 후 닫기</span>
-                </div>
-                <button class="btn-close-ad hidden" id="btn-close-ad" data-i18n="ad.close">✕ 닫기</button>
-            </div>
-        </div>
     </div>
 
     <!-- Footer with Home Link -->
@@ -364,9 +272,6 @@
     <script src="js/leaderboard-manager.js" defer></script>
     <script src="js/sound-engine.js" defer></script>
     <script src="/portal/js/haptic.js" defer></script>
-    <script src="/portal/js/daily-streak.js" defer></script>
-    <script src="/portal/js/game-ads.js" defer></script>
-    <script src="/portal/js/achievements.js" defer></script>
     <script src="js/app.js" defer></script>
 
     <script>
@@ -403,28 +308,5 @@
         .sound-toggle:hover { background: rgba(255,255,255,0.2); }
         .sound-toggle:active { transform: scale(0.95); }
     </style>
-    <!-- Social Share Buttons CSS & JS -->
-    <style>
-        .share-section{display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap}
-        .share-btn{min-height:44px;padding:10px 20px;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px;font-family:inherit}
-        .share-btn:hover{transform:translateY(-1px)}
-        .share-twitter{background:#000;color:#fff}
-        .share-url{background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.15)}
-        [data-theme="light"] .share-url{background:rgba(0,0,0,.05);color:#333;border-color:rgba(0,0,0,.1)}
-    </style>
-    <script>
-        document.getElementById('shareTwitterBtn')?.addEventListener('click',function(){var t=document.title+' '+window.location.href;window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(t),'_blank');if(typeof gtag!=='undefined')gtag('event','share',{method:'twitter'})});
-        document.getElementById('shareUrlBtn')?.addEventListener('click',function(){var b=this;navigator.clipboard.writeText(window.location.href).then(function(){b.textContent=(window.i18n?.t('share.copied')||'✅ Copied!');setTimeout(function(){b.innerHTML=(window.i18n?.t('share.copyUrl')||'📋 Copy URL')},2000)});if(typeof gtag!=='undefined')gtag('event','share',{method:'url_copy'})});
-    </script>
-    <div style="max-width:420px;margin:20px auto;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1);">
-      <h3 data-i18n="related.title" style="font-size:16px;color:#a0a0b8;margin-bottom:12px;text-align:center;">More to Explore</h3>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <a href="/puzzle-2048/" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;text-decoration:none;color:#fff;"><span style="font-size:28px;">🧩</span><span data-i18n="related.puzzle2048" style="font-size:12px;font-weight:600;color:#a0a0b8;">2048 Puzzle</span></a>
-        <a href="/block-puzzle/" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;text-decoration:none;color:#fff;"><span style="font-size:28px;">📦</span><span data-i18n="related.blockPuzzle" style="font-size:12px;font-weight:600;color:#a0a0b8;">Block Puzzle</span></a>
-        <a href="/pong-game/" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;text-decoration:none;color:#fff;"><span style="font-size:28px;">🏓</span><span data-i18n="related.pongGame" style="font-size:12px;font-weight:600;color:#a0a0b8;">Pong Game</span></a>
-        <a href="/snake-game/" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;text-decoration:none;color:#fff;"><span style="font-size:28px;">🐍</span><span data-i18n="related.snakeGame" style="font-size:12px;font-weight:600;color:#a0a0b8;">Snake Game</span></a>
-      </div>
-    </div>
-    <script src="/portal/js/cross-promo.js" defer></script>
 </body>
 </html>

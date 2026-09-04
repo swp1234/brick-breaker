@@ -2,13 +2,6 @@
   "app": {
     "loading": "Wird geladen..."
   },
-  "ad": {
-    "placeholder": "Anzeigenbereich",
-    "placeholder_interstitial": "Anzeigenbereich (Vollbild)",
-    "label": "Anzeige",
-    "countdown": "Schließen in",
-    "close": "✕ Schließen"
-  },
   "menu": {
     "subtitle": "Klassisches Brick Breaker Spiel",
     "highScore": "Höchstpunktzahl",
@@ -43,15 +36,11 @@
     "best": "Beste",
     "stage": "Stufe",
     "newRecord": "🎉 Neuer Rekord!",
-    "revive": "Anzeige ansehen zum Wiederbeleben",
     "retry": "Nochmal Spielen",
     "retryHint": "(Enter)",
     "bestStreak": "Beste Serie",
     "share": "📤 Teilen",
     "menu": "🏠 Menü"
-  },
-  "recommendations": {
-    "title": "Probieren Sie diese auch aus"
   },
   "powerups": {
     "paddleExpand": "Schläger Erweiterung",
@@ -79,11 +68,6 @@
     "confirmReset": "Möchten Sie alle Rekorde zurücksetzen?",
     "resetSuccess": "Rekorde zurückgesetzt!"
   },
-  "share": {
-    "twitter": "Twitter",
-    "copyUrl": "📋 URL kopieren",
-    "copied": "✅ Kopiert!"
-  },
   "error": {
     "storage": "Einige Funktionen sind im privaten Modus eingeschränkt.",
     "data": "Fehler beim Laden. Bitte Seite aktualisieren.",
@@ -91,12 +75,5 @@
     "audio": "Audio nicht verfügbar. Sie können fortfahren.",
     "network": "Bitte Verbindung prüfen und erneut versuchen.",
     "general": "Etwas ist schiefgelaufen. Bitte aktualisieren oder erneut versuchen."
-  },
-  "related": {
-    "title": "Mehr entdecken",
-    "puzzle2048": "2048 Puzzle",
-    "blockPuzzle": "Block-Puzzle",
-    "pongGame": "Pong-Spiel",
-    "snakeGame": "Snake-Spiel"
   }
 }

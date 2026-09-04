@@ -2,13 +2,6 @@
   "app": {
     "loading": "Chargement..."
   },
-  "ad": {
-    "placeholder": "Zone Publicitaire",
-    "placeholder_interstitial": "Zone Publicitaire (Plein Écran)",
-    "label": "Publicité",
-    "countdown": "Fermer dans",
-    "close": "✕ Fermer"
-  },
   "menu": {
     "subtitle": "Jeu Classique Brick Breaker",
     "highScore": "Meilleur Score",
@@ -43,15 +36,11 @@
     "best": "Meilleur",
     "stage": "Niveau",
     "newRecord": "🎉 Nouveau Record!",
-    "revive": "Regardez une publicité pour vous ressusciter",
     "retry": "Rejouer",
     "retryHint": "(Enter)",
     "bestStreak": "Meilleure Serie",
     "share": "📤 Partager",
     "menu": "🏠 Menu"
-  },
-  "recommendations": {
-    "title": "Essayez ceux-ci aussi"
   },
   "powerups": {
     "paddleExpand": "Expansion de Raquette",
@@ -79,11 +68,6 @@
     "confirmReset": "Êtes-vous sûr de vouloir réinitialiser tous les records ?",
     "resetSuccess": "Records réinitialisés !"
   },
-  "share": {
-    "twitter": "Twitter",
-    "copyUrl": "📋 Copier URL",
-    "copied": "✅ Copié!"
-  },
   "error": {
     "storage": "Certaines fonctions peuvent être limitées en mode privé.",
     "data": "Erreur de chargement. Veuillez rafraîchir la page.",
@@ -91,12 +75,5 @@
     "audio": "Audio indisponible. Vous pouvez continuer.",
     "network": "Vérifiez votre connexion et réessayez.",
     "general": "Un problème est survenu. Rafraîchissez ou réessayez."
-  },
-  "related": {
-    "title": "Plus à explorer",
-    "puzzle2048": "Puzzle 2048",
-    "blockPuzzle": "Puzzle de blocs",
-    "pongGame": "Jeu de Pong",
-    "snakeGame": "Jeu du serpent"
   }
 }

@@ -2,13 +2,6 @@
   "app": {
     "loading": "Loading..."
   },
-  "ad": {
-    "placeholder": "Ad Area",
-    "placeholder_interstitial": "Ad Area (Fullscreen)",
-    "label": "Ad",
-    "countdown": "Close in",
-    "close": "✕ Close"
-  },
   "menu": {
     "subtitle": "Classic Breakout Game",
     "highScore": "High Score",
@@ -43,15 +36,11 @@
     "best": "Best",
     "stage": "Stage",
     "newRecord": "🎉 New Record!",
-    "revive": "Watch Ad to Revive",
     "retry": "Play Again",
     "retryHint": "(Enter)",
     "bestStreak": "Best Streak",
     "share": "📤 Share",
     "menu": "🏠 Menu"
-  },
-  "recommendations": {
-    "title": "Try These Too"
   },
   "powerups": {
     "paddleExpand": "Paddle Expand",
@@ -79,11 +68,6 @@
     "confirmReset": "Are you sure you want to reset all records?",
     "resetSuccess": "Records reset!"
   },
-  "share": {
-    "twitter": "Twitter",
-    "copyUrl": "📋 Copy URL",
-    "copied": "✅ Copied!"
-  },
   "error": {
     "storage": "Some features may be limited in private mode. You can continue.",
     "data": "Data loading error. Please refresh the page.",
@@ -91,12 +75,5 @@
     "audio": "Audio unavailable. You can still continue.",
     "network": "Please check your connection and try again.",
     "general": "Something went wrong. Please refresh or try again."
-  },
-  "related": {
-    "title": "More to Explore",
-    "puzzle2048": "2048 Puzzle",
-    "blockPuzzle": "Block Puzzle",
-    "pongGame": "Pong Game",
-    "snakeGame": "Snake Game"
   }
 }
