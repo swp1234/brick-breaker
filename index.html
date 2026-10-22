@@ -289,9 +289,11 @@
         .sound-toggle {
             position: fixed;
             top: 12px;
-            right: 52px;
-            width: 40px;
-            height: 40px;
+            right: 112px;
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            min-height: 44px;
             border-radius: 50%;
             background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
@@ -304,6 +306,7 @@
             align-items: center;
             justify-content: center;
             transition: background 0.2s;
+            touch-action: manipulation;
         }
         .sound-toggle:hover { background: rgba(255,255,255,0.2); }
         .sound-toggle:active { transform: scale(0.95); }
