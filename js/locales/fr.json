@@ -75,5 +75,8 @@
     "audio": "Audio indisponible. Vous pouvez continuer.",
     "network": "Vérifiez votre connexion et réessayez.",
     "general": "Un problème est survenu. Rafraîchissez ou réessayez."
+  },
+  "accessibility": {
+    "skipToMain": "Aller au contenu principal"
   }
 }

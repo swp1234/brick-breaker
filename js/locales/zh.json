@@ -75,5 +75,8 @@
     "audio": "音频不可用，可继续使用。",
     "network": "请检查网络连接后重试。",
     "general": "出现问题，请刷新或重试。"
+  },
+  "accessibility": {
+    "skipToMain": "跳转到主要内容"
   }
 }

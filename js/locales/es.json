@@ -75,5 +75,8 @@
     "audio": "Audio no disponible. Puede continuar.",
     "network": "Verifique su conexión e inténtelo de nuevo.",
     "general": "Algo salió mal. Actualice o inténtelo de nuevo."
+  },
+  "accessibility": {
+    "skipToMain": "Ir al contenido principal"
   }
 }

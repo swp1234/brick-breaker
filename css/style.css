@@ -6,7 +6,11 @@
 /* Skip link for accessibility */
 .skip-link {
     position: absolute;
-    top: -40px;
+    top: -60px;
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
     left: 0;
     background: var(--primary, #e74c3c);
     color: #fff;

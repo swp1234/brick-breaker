@@ -75,5 +75,8 @@
     "audio": "Audio unavailable. You can still continue.",
     "network": "Please check your connection and try again.",
     "general": "Something went wrong. Please refresh or try again."
+  },
+  "accessibility": {
+    "skipToMain": "Skip to main content"
   }
 }

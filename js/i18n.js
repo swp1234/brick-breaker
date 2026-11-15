@@ -95,7 +95,7 @@ class I18n {
         // Update data-i18n attributes
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
-            el.textContent = this.t(key);
+            if (!el.querySelector('svg')) el.textContent = this.t(key);
         });
 
         // Update data-i18n-attr attributes (for buttons/aria-labels)
