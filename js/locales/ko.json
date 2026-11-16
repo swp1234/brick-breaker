@@ -78,5 +78,12 @@
   },
   "accessibility": {
     "skipToMain": "본문으로 건너뛰기"
+  },
+  "stats_detail": {
+    "totalScore": "총 점수",
+    "gamesPlayed": "플레이 횟수",
+    "maxStage": "최고 스테이지",
+    "bricksDestroyed": "파괴한 벽돌",
+    "avgScore": "평균 점수"
   }
 }

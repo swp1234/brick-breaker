@@ -78,5 +78,12 @@
   },
   "accessibility": {
     "skipToMain": "Перейти к основному содержимому"
+  },
+  "stats_detail": {
+    "totalScore": "Общий счёт",
+    "gamesPlayed": "Игр сыграно",
+    "maxStage": "Макс. уровень",
+    "bricksDestroyed": "Разбито блоков",
+    "avgScore": "Средний счёт"
   }
 }

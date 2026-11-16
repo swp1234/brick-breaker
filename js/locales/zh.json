@@ -78,5 +78,12 @@
   },
   "accessibility": {
     "skipToMain": "跳转到主要内容"
+  },
+  "stats_detail": {
+    "totalScore": "总分",
+    "gamesPlayed": "游戏次数",
+    "maxStage": "最高关卡",
+    "bricksDestroyed": "击碎砖块",
+    "avgScore": "平均分"
   }
 }

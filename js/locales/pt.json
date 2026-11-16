@@ -78,5 +78,12 @@
   },
   "accessibility": {
     "skipToMain": "Ir para o conteúdo principal"
+  },
+  "stats_detail": {
+    "totalScore": "Pontuação total",
+    "gamesPlayed": "Jogos realizados",
+    "maxStage": "Fase máxima",
+    "bricksDestroyed": "Blocos quebrados",
+    "avgScore": "Média"
   }
 }

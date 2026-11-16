@@ -78,5 +78,12 @@
   },
   "accessibility": {
     "skipToMain": "Ana içeriğe geç"
+  },
+  "stats_detail": {
+    "totalScore": "Toplam Skor",
+    "gamesPlayed": "Oynanan Oyun",
+    "maxStage": "Maks. Aşama",
+    "bricksDestroyed": "Kırılan Tuğla",
+    "avgScore": "Ortalama Skor"
   }
 }

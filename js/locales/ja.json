@@ -78,5 +78,12 @@
   },
   "accessibility": {
     "skipToMain": "メインコンテンツへ移動"
+  },
+  "stats_detail": {
+    "totalScore": "合計スコア",
+    "gamesPlayed": "プレイ回数",
+    "maxStage": "最高ステージ",
+    "bricksDestroyed": "破壊ブロック",
+    "avgScore": "平均スコア"
   }
 }

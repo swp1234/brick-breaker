@@ -78,5 +78,12 @@
   },
   "accessibility": {
     "skipToMain": "Lewati ke konten utama"
+  },
+  "stats_detail": {
+    "totalScore": "Total Skor",
+    "gamesPlayed": "Total Main",
+    "maxStage": "Tahap Maks",
+    "bricksDestroyed": "Bata Hancur",
+    "avgScore": "Rata-rata Skor"
   }
 }

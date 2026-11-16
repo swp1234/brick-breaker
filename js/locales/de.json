@@ -78,5 +78,12 @@
   },
   "accessibility": {
     "skipToMain": "Zum Hauptinhalt springen"
+  },
+  "stats_detail": {
+    "totalScore": "Gesamtpunkte",
+    "gamesPlayed": "Gespielte Spiele",
+    "maxStage": "Max. Level",
+    "bricksDestroyed": "Zerstörte Steine",
+    "avgScore": "Ø Punkte"
   }
 }

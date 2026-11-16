@@ -78,5 +78,12 @@
   },
   "accessibility": {
     "skipToMain": "मुख्य सामग्री पर जाएं"
+  },
+  "stats_detail": {
+    "totalScore": "कुल स्कोर",
+    "gamesPlayed": "खेले गए गेम",
+    "maxStage": "अधिकतम स्टेज",
+    "bricksDestroyed": "तोड़ी गई ईंटें",
+    "avgScore": "औसत स्कोर"
   }
 }
